@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global Reset & Base ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F8F6F1;
+  color: #1A1A1A;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Custom Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F6F1;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8963E;
+  border-radius: 3px;
+}
+
+/* ── Typography Utilities ────────────────────────────────── */
+.font-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Image Placeholder ───────────────────────────────────── */
+.img-placeholder {
+  background: linear-gradient(135deg, #E8E2D9 0%, #D4C9BC 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.img-placeholder::after {
+  content: 'image';
+  position: absolute;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6B6560;
+  background: rgba(255,255,255,0.6);
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* ── Gold underline SVG draw ─────────────────────────────── */
+.gold-underline {
+  position: relative;
+  display: inline-block;
+}
+
+/* ── Accordion ───────────────────────────────────────────── */
+.accordion-content {
+  overflow: hidden;
+}
+
+/* ── Section transitions ─────────────────────────────────── */
+.section-enter {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* ── Gold border hover draw ──────────────────────────────── */
+.border-draw {
+  position: relative;
+}
+.border-draw::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid #B8963E;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.border-draw:hover::before {
+  transform: scaleX(1);
+}
+
+/* ── Product card gold border ────────────────────────────── */
+.product-card {
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  border-color: #B8963E;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(184,150,62,0.1);
+}
+
+/* ── Premium Buttons ─────────────────────────────────────── */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-premium-solid {
+  background: #1A1A1A;
+  color: #F8F6F1;
+}
+.btn-premium-solid:hover {
+  background: #B8963E;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(184, 150, 62, 0.4);
+}
+
+.btn-premium-outline {
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  color: rgba(26, 26, 26, 0.6);
+}
+.btn-premium-outline:hover {
+  border-color: #B8963E;
+  color: #B8963E;
+  transform: translateY(-2px);
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: rotate(30deg);
+  transition: none;
+}
+.shimmer:hover::after {
+  left: 150%;
+  transition: all 0.8s ease;
+}
+
+/* ── Star rating ─────────────────────────────────────────── */
+.star-gold {
+  color: #B8963E;
+}
+
+/* ── Nav link hover ──────────────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #B8963E;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ── Why Ananaz staircase ────────────────────────────────── */
+.why-item:nth-child(1) { margin-left: 0; }
+.why-item:nth-child(2) { margin-left: 4rem; }
+.why-item:nth-child(3) { margin-left: 8rem; }
+.why-item:nth-child(4) { margin-left: 4rem; }
+.why-item:nth-child(5) { margin-left: 0; }
+
+@media (max-width: 768px) {
+  .why-item:nth-child(n) { margin-left: 0; }
+}
