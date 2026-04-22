@@ -1,8 +1,10 @@
 import { useRef, type ReactNode } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight, MessageCircle, ExternalLink } from 'lucide-react'
 import { waGeneral } from '../lib/whatsapp'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -57,11 +59,13 @@ const team = [
   },
 ]
 
-const values = [
-  { label: 'Honesty First', body: 'We only recommend what your skin actually needs. No upselling. No pressure.' },
-  { label: 'Hands-On Expertise', body: 'Every treatment at Ananaz is performed by a certified, trained professional — never a trainee unsupervised.' },
-  { label: 'Accessible Care', body: 'Great skin isn\'t a privilege. Our pricing is built to be fair — premium quality without a premium markup.' },
-  { label: 'Community Roots', body: 'We\'re a Malaysian business, built by Malaysians, for Malaysian women. That\'s not marketing — it\'s who we are.' },
+const baGallery = [
+  { title: 'Pro Series Skin Tag', category: 'Skin Treatment', desc: 'Complete removal of persistent skin tags in a single targeted session.' },
+  { title: 'Advanced Melasma', category: 'Skin Treatment', desc: 'Significant reduction in deep pigmentation through consistent clinical care.' },
+  { title: 'Milia / Oil Cysts', category: 'Skin Treatment', desc: 'Clear skin surface restoration through professional extraction techniques.' },
+  { title: 'Body Contouring', category: 'Body Spa', desc: 'Firming and detoxification results following our heritage jamu programme.' },
+  { title: 'Bridal Preparation', category: 'Wedding', desc: 'Luminous skin radiance achieved over a 4-week bridal preparation timeline.' },
+  { title: 'Acne Reconstruction', category: 'Therapy', desc: 'Texture refinement and active acne suppression for long-term skin health.' },
 ]
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -100,35 +104,18 @@ export default function AboutPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-
-      {/* ── Back nav ──────────────────────────────────────────────── */}
-      <div className="fixed top-6 left-6 z-50">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 bg-cream/90 backdrop-blur-sm border border-divider px-4 py-2 font-body text-xs font-medium text-dark hover:border-gold hover:text-gold transition-all duration-300"
-        >
-          <ArrowLeft size={13} />
-          Back to Home
-        </Link>
-      </div>
+      <Navbar />
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-end overflow-hidden bg-dark">
-        {/* Parallax background image */}
         <motion.div style={{ y: heroImageY }} className="absolute inset-0">
           <div className="img-placeholder w-full h-full opacity-40" />
         </motion.div>
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-dark/20 pointer-events-none" />
-
-        {/* Dot pattern */}
+        <div className="absolute inset-0 bg-dark/70 pointer-events-none" />
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '36px 36px' }}
         />
-
-        {/* Text */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-24 pt-40">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -139,7 +126,6 @@ export default function AboutPage() {
             <span className="inline-block w-8 h-px bg-gold" />
             Est. 2000 · Cheras, Selangor
           </motion.p>
-
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,7 +135,6 @@ export default function AboutPage() {
             Two Decades of Trust.<br />
             <span className="text-gold italic">One Unwavering Mission.</span>
           </motion.h1>
-
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,19 +149,14 @@ export default function AboutPage() {
       {/* ── FOUNDER STORY ─────────────────────────────────────────── */}
       <section className="py-28 lg:py-36">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-          {/* Image */}
           <FadeUp>
             <div className="relative">
               <div className="img-placeholder w-full h-[540px]" />
-              {/* Gold accent */}
               <div className="absolute -bottom-6 -right-6 w-48 h-48 border border-gold/30 pointer-events-none hidden lg:block" />
               <div className="absolute -top-4 -left-4 w-24 h-px bg-gold/50 hidden lg:block" />
               <div className="absolute -top-4 -left-4 w-px h-24 bg-gold/50 hidden lg:block" />
             </div>
           </FadeUp>
-
-          {/* Text */}
           <div>
             <FadeUp delay={0.1}>
               <SectionLabel>The Founder</SectionLabel>
@@ -184,21 +164,12 @@ export default function AboutPage() {
                 Born from a belief that every woman deserves great skin.
               </h2>
             </FadeUp>
-
             <FadeUp delay={0.2}>
               <div className="space-y-5 font-body text-muted text-base leading-relaxed">
-                <p>
-                  In 2000, <strong className="text-dark font-medium">Pn Samsinar</strong> opened the doors of the first Ananaz outlet in Cheras with a simple but powerful belief: that professional skincare shouldn't be gatekept behind luxury price tags.
-                </p>
-                <p>
-                  She had spent years watching Malaysian women settle for treatments that promised much and delivered little. Ananaz was her answer — a place where results were guaranteed not by marketing, but by genuine clinical skill.
-                </p>
-                <p>
-                  Over two decades later, that same ethos drives everything we do. Three branches. Hundreds of trained therapists. Ten thousand clients and counting. And Pn Samsinar still comes in on Tuesdays.
-                </p>
+                <p>Ananaz was built on results first. No gimmicks, no aggressive upselling — just 20 years of clinical skin expertise delivered by therapists who actually care.</p>
+                <p>Pn Samsinar set out to create a sanctuary where Malaysian women could access high-grade treatments at fair pricing. That mission remains the heartbeat of every Ananaz branch today.</p>
               </div>
             </FadeUp>
-
             <FadeUp delay={0.3} className="mt-8">
               <blockquote className="border-l-2 border-gold pl-6 py-2">
                 <p className="font-display text-2xl italic font-semibold text-gold leading-snug">
@@ -211,24 +182,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── VISUAL STRIP (3 images) ────────────────────────────────── */}
-      <section className="py-10 overflow-hidden">
-        <FadeUp>
-          <div className="flex gap-3 px-6 lg:px-10 max-w-7xl mx-auto">
-            <div className="img-placeholder flex-1 h-56 lg:h-80" />
-            <div className="img-placeholder flex-[1.4] h-56 lg:h-80 mt-8" />
-            <div className="img-placeholder flex-1 h-56 lg:h-80" />
-          </div>
-        </FadeUp>
-      </section>
-
       {/* ── TIMELINE ──────────────────────────────────────────────── */}
       <section className="py-28 lg:py-36 bg-dark relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }}
         />
-
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <FadeUp>
             <SectionLabel>Our Journey</SectionLabel>
@@ -236,47 +195,64 @@ export default function AboutPage() {
               25 Years in the Making.
             </h2>
           </FadeUp>
-
-          {/* Timeline items */}
           <div className="relative">
-            {/* Vertical line */}
             <div className="absolute left-[7.5rem] lg:left-1/2 top-0 bottom-0 w-px bg-gold/20 hidden sm:block" />
-
             <div className="flex flex-col gap-0">
-              {timeline.map((item, i) => {
-                const isLeft = i % 2 === 0
-                return (
-                  <TimelineItem key={item.year} item={item} isLeft={isLeft} index={i} />
-                )
-              })}
+              {timeline.map((item, i) => (
+                <TimelineItem key={item.year} item={item} isLeft={i % 2 === 0} index={i} />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── VALUES ────────────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 bg-cream">
+      {/* ── RESULTS PORTFOLIO ───────────────────────────────────────── */}
+      <section className="py-28 lg:py-36 bg-cream border-t border-divider">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <FadeUp>
-            <SectionLabel>What We Stand For</SectionLabel>
-            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-dark mb-16 max-w-xl">
-              The Values Behind the Brand.
+          <FadeUp className="text-center mb-20 flex flex-col items-center">
+            <SectionLabel>Our Portfolio</SectionLabel>
+            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-dark max-w-2xl">
+              Real Stories.<br /><span className="text-gold italic">Real Results.</span>
             </h2>
+            <p className="mt-6 font-body text-muted text-base max-w-lg leading-relaxed">
+              Experience the visual proof of our 25-year commitment to clinical excellence and genuine skin restoration.
+            </p>
           </FadeUp>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {values.map((v, i) => (
-              <FadeUp key={v.label} delay={i * 0.1}>
-                <div className="border border-divider p-8 hover:border-gold transition-colors duration-300 group">
-                  <div className="font-body text-[10px] tracking-[0.25em] uppercase text-gold mb-4">0{i + 1}</div>
-                  <h3 className="font-display text-2xl font-semibold text-dark mb-3 group-hover:text-gold transition-colors duration-300">
-                    {v.label}
-                  </h3>
-                  <p className="font-body text-muted text-sm leading-relaxed">{v.body}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {baGallery.map((item, i) => (
+              <FadeUp key={item.title} delay={i * 0.08} className="group">
+                <div className="relative bg-white border border-divider overflow-hidden flex flex-col h-full">
+                  <div className="flex h-64 border-b border-divider overflow-hidden">
+                    <div className="flex-1 relative overflow-hidden group-hover:scale-105 transition-transform duration-700">
+                      <div className="img-placeholder w-full h-full bg-[#E8E2D9]" />
+                      <span className="absolute bottom-3 left-3 bg-dark/70 text-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">Before</span>
+                    </div>
+                    <div className="w-px bg-divider z-10" />
+                    <div className="flex-1 relative overflow-hidden group-hover:scale-105 transition-transform duration-700 delay-[50ms]">
+                      <div className="img-placeholder w-full h-full bg-[#F3F1ED]" />
+                      <span className="absolute bottom-3 right-3 bg-gold/90 text-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">After</span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <span className="font-body text-[9px] font-bold tracking-[0.2em] uppercase text-gold mb-2 block">{item.category}</span>
+                    <h3 className="font-display text-xl font-semibold text-dark mb-2 group-hover:text-gold transition-colors duration-300">{item.title}</h3>
+                    <p className="font-body text-xs text-muted leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
               </FadeUp>
             ))}
           </div>
+
+          <FadeUp className="mt-20 text-center" delay={0.4}>
+            <p className="font-body text-sm text-muted mb-8 italic">
+              *All photos displayed are of actual Ananaz clients. Your results may vary based on skin type and condition.
+            </p>
+            <a href="https://www.google.com/search?q=ananaz+medispa" target="_blank" rel="noopener noreferrer"
+              className="btn-premium px-10 py-5 text-[11px] font-bold tracking-[0.2em] uppercase inline-flex items-center gap-3">
+               View Proof on Google <ExternalLink size={12} />
+            </a>
+          </FadeUp>
         </div>
       </section>
 
@@ -297,14 +273,10 @@ export default function AboutPage() {
             {team.map((member, i) => (
               <FadeUp key={member.name} delay={i * 0.12}>
                 <div className="group flex flex-col">
-                  {/* Profile image */}
                   <div className="relative overflow-hidden">
                     <div className="img-placeholder w-full h-80 lg:h-96 transition-transform duration-700 group-hover:scale-105" />
-                    {/* Gold border appears on hover */}
                     <div className="absolute inset-0 border border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
-
-                  {/* Info */}
                   <div className="pt-6 border-b border-divider pb-6">
                     <h3 className="font-display text-2xl font-semibold text-dark">{member.name}</h3>
                     <p className="font-body text-xs tracking-wide uppercase text-gold mt-1">{member.role}</p>
@@ -317,27 +289,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── LARGE VISUAL BREAK ────────────────────────────────────── */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <div className="img-placeholder w-full h-full" />
-        <div className="absolute inset-0 bg-dark/60 flex items-center justify-center">
-          <FadeUp>
-            <p className="font-display text-4xl lg:text-6xl xl:text-7xl italic font-semibold text-white text-center max-w-3xl px-6 leading-[1.15]">
-              "This isn't just a medispa.<br />
-              <span className="text-gold">It's where confidence is restored."</span>
-            </p>
-          </FadeUp>
-        </div>
-      </section>
-
       {/* ── CTA ───────────────────────────────────────────────────── */}
-      <section className="py-28 bg-cream text-center">
-        <FadeUp>
+      <section className="py-28 bg-dark text-center relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '36px 36px' }}
+        />
+        <FadeUp className="relative z-10">
           <SectionLabel>Ready to Begin?</SectionLabel>
-          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-dark mb-6 max-w-lg mx-auto">
-            Your skin journey starts with one message.
+          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-white mb-6 max-w-lg mx-auto leading-tight">
+            Confidence starts with a single message.
           </h2>
-          <p className="font-body text-muted text-base mb-10 max-w-md mx-auto leading-relaxed">
+          <p className="font-body text-white/50 text-base mb-10 max-w-md mx-auto leading-relaxed">
             WhatsApp us to book a consultation, enquire about a treatment, or simply ask — we're always here.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -345,37 +308,21 @@ export default function AboutPage() {
               href={waGeneral()}
               target="_blank"
               rel="noopener noreferrer"
-              id="about-page-cta-wa"
-              className="inline-flex items-center gap-2 bg-dark text-cream font-body text-sm font-medium px-8 py-4 hover:bg-gold transition-colors duration-300"
+              className="btn-premium px-10 py-5 text-[11px] font-bold tracking-[0.2em] uppercase inline-flex items-center gap-3"
             >
               <MessageCircle size={15} />
               WhatsApp Us
             </a>
-            <Link
-              to="/#services"
-              className="inline-flex items-center gap-2 font-body text-sm font-medium text-dark border-b border-dark/40 pb-0.5 hover:text-gold hover:border-gold transition-all duration-300"
-            >
-              View Our Services
-              <ArrowRight size={14} />
-            </Link>
           </div>
         </FadeUp>
       </section>
+
+      <Footer />
     </div>
   )
 }
 
-// ─── Timeline Item ─────────────────────────────────────────────────────────────
-
-function TimelineItem({
-  item,
-  isLeft,
-  index,
-}: {
-  item: typeof timeline[0]
-  isLeft: boolean
-  index: number
-}) {
+function TimelineItem({ item, isLeft, index }: { item: typeof timeline[0]; isLeft: boolean; index: number }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -387,15 +334,10 @@ function TimelineItem({
       transition={{ duration: 0.65, delay: 0.05 * index, ease: [0.22, 1, 0.36, 1] }}
       className={`relative flex gap-8 py-12 items-start ${isLeft ? 'lg:flex-row lg:pr-[calc(50%+2rem)]' : 'lg:flex-row-reverse lg:pl-[calc(50%+2rem)]'}`}
     >
-      {/* Year */}
       <div className="flex-shrink-0 w-24 lg:w-auto">
         <span className="font-display text-4xl font-semibold text-gold/60">{item.year}</span>
       </div>
-
-      {/* Dot on centre line */}
       <div className="hidden lg:flex absolute left-1/2 top-[3.5rem] -translate-x-1/2 w-3 h-3 rounded-full bg-gold border-4 border-dark z-10" />
-
-      {/* Content */}
       <div className="flex-1">
         <h3 className="font-display text-xl font-semibold text-white mb-2">{item.title}</h3>
         <p className="font-body text-sm text-white/50 leading-relaxed max-w-sm">{item.body}</p>

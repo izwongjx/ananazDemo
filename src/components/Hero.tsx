@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Calendar } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { waBook } from '../lib/whatsapp'
 
 const words = ["Malaysia's", 'Most', 'Trusted', 'MediSpa.']
@@ -117,16 +118,14 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 1.1 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <a
-              id="hero-cta-whatsapp"
-              href={waBook('an appointment')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              id="hero-cta-booking"
+              to="/booking"
               className="inline-flex items-center gap-2 bg-dark text-cream font-body text-sm font-medium px-7 py-4 hover:bg-gold transition-colors duration-300"
             >
               Book Appointment
               <ArrowRight size={16} />
-            </a>
+            </Link>
             <a
               id="hero-cta-services"
               href="#services"

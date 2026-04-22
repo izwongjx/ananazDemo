@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Star } from 'lucide-react'
+import { Star, ExternalLink } from 'lucide-react'
 
 const reviews = [
   {
@@ -118,21 +118,31 @@ export default function Reviews() {
           </div>
         </div>
 
-        {/* Rating row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-          className="mt-12 flex items-center justify-center gap-4 flex-wrap"
+          transition={{ delay: 0.6 }}
+          className="mt-12 flex flex-col items-center gap-8"
         >
-          <div className="flex gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={18} className="text-gold fill-gold" />
-            ))}
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <div className="flex gap-1" >
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={18} className="text-gold fill-gold" />
+              ))}
+            </div>
+            <span className="font-body text-sm text-muted">
+              Rated <strong className="text-dark">5★</strong> on Google & Facebook
+            </span>
           </div>
-          <span className="font-body text-sm text-muted">
-            Rated <strong className="text-dark">5★</strong> on Google & Facebook
-          </span>
+
+          <a 
+            href="https://www.google.com/search?q=ananaz+medispa&oq=ananaz+medispa++&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYPTIGCAQQRRg90gEIOTU5MGowajmoAgCwAgA&sourceid=chrome&ie=UTF-8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-premium px-8 py-3.5 text-[10px] font-bold tracking-[0.25em] uppercase inline-flex items-center gap-3 hover:translate-y-[-2px] hover:shadow-lg active:translate-y-0 transition-all duration-300"
+          >
+            View all on Google <ExternalLink size={12} />
+          </a>
         </motion.div>
       </div>
     </section>

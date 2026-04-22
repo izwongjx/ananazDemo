@@ -15,6 +15,7 @@ const categories = [
       { name: 'Oil Cysts / Milia Treatment', price: 'RM199', original: 'RM288' },
     ],
     waMsg: 'Skin Treatments',
+    learnMoreHref: '/skin-treatments',
   },
   {
     num: '02',
@@ -25,6 +26,7 @@ const categories = [
       { name: '4-in-1 Traditional Package', price: 'RM249' },
     ],
     waMsg: 'Body Spa',
+    learnMoreHref: '/body-spa',
   },
   {
     num: '03',
@@ -36,6 +38,7 @@ const categories = [
       { name: 'Bridal Package', price: 'RM350' },
     ],
     waMsg: 'Wedding & Bridal Package',
+    learnMoreHref: '/wedding-bridal',
   },
 ]
 
@@ -124,21 +127,19 @@ function ServiceBand({ cat, reversed }: { cat: typeof categories[0]; reversed: b
 
         <div className="flex flex-wrap gap-4">
           <Link
-            to="/treatments"
+            to={cat.learnMoreHref}
             className="btn-premium btn-premium-outline px-7 py-3 text-xs tracking-widest uppercase font-bold cursor-pointer"
           >
             Learn More
           </Link>
-          <a
-            href={waBook(cat.waMsg)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/booking"
             id={`services-cta-${cat.num}`}
             className="btn-premium btn-premium-solid shimmer px-7 py-3 text-xs tracking-widest uppercase font-bold cursor-pointer flex items-center gap-2 self-start"
           >
-            Enquire More
+            Book Now
             <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
       </div>
     </motion.div>

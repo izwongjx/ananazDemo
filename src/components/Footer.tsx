@@ -1,13 +1,14 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight, Instagram, Facebook, Youtube, MapPin } from 'lucide-react'
 import { waGeneral, waBranch } from '../lib/whatsapp'
 
 const quickLinks = [
-  { label: 'Home',       href: '#home' },
-  { label: 'Services',   href: '#services' },
-  { label: 'Products',   href: '#products' },
-  { label: 'Branches',   href: '#branches' },
-  { label: 'Academy',    href: '#academy' },
-  { label: 'Contact',    href: '#contact' },
+  { label: 'Home',       href: '/#home' },
+  { label: 'Services',   href: '/#services' },
+  { label: 'Products',   href: '/products' },
+  { label: 'Branches',   href: '/#branches' },
+  { label: 'Academy',    href: '/#academy' },
+  { label: 'Booking',    href: '/booking' },
 ]
 
 const branches = [
@@ -57,9 +58,9 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map(l => (
                 <li key={l.label}>
-                  <a href={l.href} className="font-body text-sm text-white/50 hover:text-white transition-colors duration-200">
+                  <Link to={l.href} className="font-body text-sm text-white/50 hover:text-white transition-colors duration-200">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -102,15 +103,13 @@ export default function Footer() {
               )}
             </div>
 
-            <a
-              href={waGeneral()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/booking"
               className="btn-premium btn-premium-solid shimmer w-full mt-6 flex items-center justify-center gap-2 bg-gold text-dark font-body text-xs font-semibold px-5 py-3 tracking-widest uppercase cursor-pointer"
             >
-              General Enquiry
+              Book Appointment
               <ArrowRight size={12} />
-            </a>
+            </Link>
           </div>
         </div>
 
