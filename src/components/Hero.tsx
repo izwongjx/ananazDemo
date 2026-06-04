@@ -1,199 +1,194 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, ChevronDown, Calendar } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { waBook } from '../lib/whatsapp'
-
-const words = ["Malaysia's", 'Most', 'Trusted', 'MediSpa.']
-const words2 = ['Over', '20 Years', 'of', 'Real', 'Results.']
-
-const wordVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-}
-const letterVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-}
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] })
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
+  const [currentSlide, setCurrentSlide] = useState(0)
+  
+  const slides = [
+    { id: 'quote' },
+    { id: 'promo-1', image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=1000' },
+    { id: 'promo-2', image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=1000' }
+  ]
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length)
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
 
   return (
     <section
       id="home"
-      ref={containerRef}
-      className="relative min-h-screen bg-cream overflow-hidden flex items-center"
+      className="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden"
     >
-      {/* Background texture */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-      />
+      {/* ── LEFT SIDE ─────────────────────────────────────────────── */}
+      <div className="w-full lg:w-1/2 bg-cream flex flex-col justify-center px-6 lg:px-20 pt-32 lg:pt-40 pb-16 lg:pb-24 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-xl mx-auto lg:mx-0 mt-4 lg:mt-8"
+        >
+          {/* Top Label */}
+          <div className="flex items-center gap-4 mb-8">
+            <span className="w-20 h-px bg-gold" />
+            <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-gold font-bold">
+              25 Years of Skin Expertise - Kuala Lumpur
+            </span>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-0 pt-24 pb-16 min-h-screen items-center">
-        {/* Left: Editorial Text */}
-        <div className="relative z-10 lg:pr-8">
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-body text-xs tracking-[0.25em] uppercase text-gold mb-8 flex items-center gap-3"
-          >
-            <span className="inline-block w-8 h-px bg-gold" />
-            Est. 2000 · Selangor, Malaysia
-          </motion.p>
+          {/* Main Headline */}
+          <h1 className="font-display text-5xl lg:text-7xl font-light text-dark leading-[1.1] mb-2">
+            Lived it.<br />
+            <span className="text-gold italic">Mastered it.</span>
+          </h1>
 
-          {/* Line 1 */}
-          <motion.h1
-            variants={wordVariants}
-            initial="hidden"
-            animate="visible"
-            className="font-display text-5xl lg:text-7xl xl:text-8xl font-semibold leading-[1.0] text-dark mb-0"
-          >
-            {words.map((w, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: w === 'MediSpa.' ? 0 : '0.25em' }}>
-                <motion.span variants={letterVariant} style={{ display: 'inline-block' }}>{w}</motion.span>
-              </span>
-            ))}
-          </motion.h1>
+          {/* Subheading */}
+          <p className="font-display text-xl lg:text-2xl italic text-muted mb-8">
+            Dah rasa. Dah kuasai.
+          </p>
 
-          {/* Line 2 with gold underline on "20 Years" */}
-          <motion.div
-            variants={wordVariants}
-            initial="hidden"
-            animate="visible"
-            className="font-display text-5xl lg:text-7xl xl:text-8xl font-semibold leading-[1.0] text-dark mt-1 mb-8"
-          >
-            {words2.map((w, i) => (
-              <span key={i} style={{ display: 'inline-block', marginRight: i < words2.length - 1 ? '0.25em' : 0 }}>
-                {w === '20 Years' ? (
-                  <span className="relative">
-                    <motion.span variants={letterVariant} style={{ display: 'inline-block' }} className="text-dark">
-                      {w}
-                    </motion.span>
-                    {/* SVG gold underline draw */}
-                    <motion.svg
-                      className="absolute -bottom-2 left-0 w-full"
-                      height="6"
-                      viewBox="0 0 160 6"
-                      fill="none"
-                      preserveAspectRatio="none"
-                    >
-                      <motion.path
-                        d="M 0 4 Q 80 1 160 4"
-                        stroke="#B8963E"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 0.9, delay: 1.2, ease: 'easeOut' }}
-                      />
-                    </motion.svg>
-                  </span>
-                ) : (
-                  <motion.span variants={letterVariant} style={{ display: 'inline-block' }}>{w}</motion.span>
-                )}
-              </span>
-            ))}
-          </motion.div>
+          {/* Description */}
+          <p className="font-body text-sm lg:text-base text-muted leading-relaxed mb-10 max-w-md">
+            Sam knows exactly what it feels like to try everything and still wake up disappointed. 
+            <strong className="font-semibold text-dark"> She found the answers the hard way</strong> — 
+            and has spent <strong className="font-semibold text-dark">25 years making sure you don't have to.</strong>
+          </p>
 
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="font-body text-muted text-base lg:text-lg leading-relaxed max-w-md mb-10"
-          >
-            From skin tag removal to full-body spa — we've helped over{' '}
-            <strong className="text-dark font-medium">10,000 customers</strong> discover the skin they deserve.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.1 }}
-            className="flex flex-wrap items-center gap-4"
-          >
-            <Link
-              id="hero-cta-booking"
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
+            <Link 
               to="/booking"
-              className="inline-flex items-center gap-2 bg-dark text-cream font-body text-sm font-medium px-7 py-4 hover:bg-gold transition-colors duration-300"
+              className="w-full sm:w-auto px-8 py-3.5 bg-gold text-white font-body text-xs tracking-widest uppercase font-bold hover:bg-peach transition-colors text-center rounded-full shadow-sm"
             >
-              Book Appointment
-              <ArrowRight size={16} />
+              Book Your Consultation
             </Link>
-            <a
-              id="hero-cta-services"
-              href="#services"
-              className="inline-flex items-center gap-2 font-body text-sm font-medium text-dark border-b border-dark/40 pb-0.5 hover:border-gold hover:text-gold transition-all duration-300"
+            <Link 
+              to="/about"
+              className="w-full sm:w-auto px-8 py-3.5 border border-teal text-teal font-body text-xs tracking-widest uppercase font-bold hover:bg-dark hover:border-dark hover:text-white transition-colors text-center rounded-full"
             >
-              Explore Services
-              <ChevronDown size={16} />
-            </a>
-          </motion.div>
+              Our Story &rarr;
+            </Link>
+          </div>
 
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.4 }}
-            className="flex items-center gap-8 mt-14 pt-8 border-t border-divider"
-          >
-            {[['10,000+', 'Customers Served'], ['20+', 'Years Experience'], ['3', 'Branches']].map(([num, label]) => (
-              <div key={label} className="text-center">
-                <div className="font-display text-2xl font-semibold text-dark">{num}</div>
-                <div className="font-body text-[10px] tracking-widest uppercase text-muted mt-0.5">{label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Right: Portrait Image */}
-        <div className="relative lg:-mr-10 mt-10 lg:mt-0">
-          <motion.div
-            initial={{ scale: 1.12, opacity: 0 }}
-            animate={{ scale: 1.0, opacity: 1 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            style={{ y: imageY }}
-            className="relative h-[55vh] lg:h-[88vh] overflow-hidden"
-          >
-            <div className="img-placeholder w-full h-full" />
-
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
-              className="absolute bottom-8 -left-6 bg-cream shadow-xl px-5 py-4 border-l-2 border-gold"
-            >
-              <div className="font-display text-2xl font-semibold text-dark leading-none">5★</div>
-              <div className="font-body text-[11px] text-muted mt-1 tracking-wide">Rated on Google</div>
-            </motion.div>
-          </motion.div>
-
-          {/* Gold accent line */}
-          <div className="absolute top-12 -right-4 w-px h-32 bg-gradient-to-b from-transparent via-gold to-transparent opacity-60 hidden lg:block" />
-        </div>
+        </motion.div>
       </div>
 
-      {/* Scroll hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="font-body text-[10px] tracking-[0.2em] uppercase text-muted">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-px h-8 bg-gradient-to-b from-muted to-transparent"
-        />
-      </motion.div>
+      {/* ── RIGHT SIDE ────────────────────────────────────────────── */}
+      <div className="w-full lg:w-1/2 relative flex flex-col justify-end px-8 lg:px-16 py-20 lg:pb-16 lg:pt-0 overflow-hidden bg-dark group">
+        
+        {/* Background Layer */}
+        <AnimatePresence mode="wait">
+          {currentSlide === 0 && (
+            <motion.div 
+              key="slide-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 bg-gradient-to-br from-[#398880] via-[#35615d] to-[#43443e] z-0"
+            >
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] border border-white/10 rounded-full translate-x-1/4 -translate-y-1/4 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] border border-white/10 rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />
+            </motion.div>
+          )}
+
+          {currentSlide > 0 && (
+            <motion.div
+              key={`slide-${currentSlide}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-0"
+            >
+              <img 
+                src={slides[currentSlide].image} 
+                alt="Campaign Placeholder" 
+                className="w-full h-full object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Content Layer */}
+        <AnimatePresence mode="wait">
+          {currentSlide === 0 ? (
+            <motion.div 
+              key="content-0"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.5 }}
+              className="relative z-10 max-w-sm mx-auto lg:mx-0 lg:ml-0 lg:mt-auto"
+            >
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-3 px-4 py-2 border border-white/10 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E5C158]" />
+                <span className="font-body text-[8px] tracking-[0.2em] uppercase text-cream">
+                  Trusted by thousands of Malaysian women
+                </span>
+              </div>
+
+              {/* Quote */}
+              <blockquote className="font-display text-2xl lg:text-3xl italic text-white leading-snug mb-6">
+                "I didn't come into beauty to build a business. I came to find the answer my own skin was begging for — then share it with every woman who felt the same."
+              </blockquote>
+
+              {/* Author */}
+              <p className="font-body text-[9px] tracking-[0.25em] uppercase text-cream/70">
+                — Sam, Founder · Ananaz Medispa
+              </p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={`content-${currentSlide}`}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.5 }}
+              className="relative z-10 max-w-sm mx-auto lg:mx-0 lg:ml-0 lg:mt-auto"
+            >
+              <div className="inline-flex items-center gap-3 px-4 py-2 border border-white/20 bg-black/20 backdrop-blur-sm rounded-full mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-peach" />
+                <span className="font-body text-[8px] tracking-[0.2em] uppercase text-white">
+                  Latest Updates
+                </span>
+              </div>
+              <h3 className="font-display text-3xl lg:text-4xl text-white mb-4">
+                Special Event & Campaign Placeholder
+              </h3>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Navigation Arrows */}
+        <div className="absolute top-1/2 left-4 right-4 -translate-y-1/2 flex justify-between z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button 
+            onClick={prevSlide}
+            className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-colors pointer-events-auto"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button 
+            onClick={nextSlide}
+            className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-colors pointer-events-auto"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 right-8 z-20 flex gap-2">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentSlide(idx)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-white w-6' : 'bg-white/50'}`}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   )
 }

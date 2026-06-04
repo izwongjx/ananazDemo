@@ -1,39 +1,61 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Star, ExternalLink } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { Star, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 
-const reviews = [
+const smallReviews = [
   {
     id: 'r1',
-    text: 'I noticed huge improvement in my skin texture especially for the skin tag... I\'m so glad to have Ms Fyka as my beautician. She\'s very thorough and professional. Highly recommended!',
-    author: 'Nur Raihani',
-    source: 'Google Reviews',
+    text: "Dah 3 tahun jadi client Ananaz. Kulit saya jauh lebih baik. Sam faham apa yang kulit saya perlukan.",
+    author: 'NUR A., 42 · PETALING JAYA',
     stars: 5,
-    featured: true,
   },
   {
     id: 'r2',
-    text: 'Been coming here for 3 years. The staff are so warm and genuinely care about your skin. My melasma has improved dramatically. Worth every ringgit!',
-    author: 'Suraya Ahmad',
-    source: 'Google Reviews',
+    text: "I've tried so many clinics. Ananaz is the first place where I felt genuinely listened to. No hard sell, just honest advice.",
+    author: 'PRIYA M., 38 · BANGSAR',
     stars: 5,
-    featured: false,
   },
   {
     id: 'r3',
-    text: 'The bridal package was amazing — my skin glowed on my wedding day. All my relatives asked what I did! Thank you Ananaz!',
-    author: 'Farah Nadia',
-    source: 'Facebook',
+    text: "Sam's story resonated with me deeply. She really has lived through what I was going through. That trust made all the difference.",
+    author: 'LINDA T., 51 · DAMANSARA',
     stars: 5,
-    featured: false,
+  },
+  {
+    id: 'r4',
+    text: "My acne scars have faded significantly. Sam's personalized approach is truly life-changing. Highly recommend to anyone struggling with their skin.",
+    author: 'AMINA S., 29 · SUBANG JAYA',
+    stars: 5,
+  },
+  {
+    id: 'r5',
+    text: "The atmosphere is so relaxing, and the treatments actually work. I've been a regular for 5 years now and my skin has never looked better.",
+    author: 'CHLOE W., 34 · MONT KIARA',
+    stars: 5,
+  },
+  {
+    id: 'r6',
+    text: "Finally, someone who understands sensitive skin. The products they use are top-notch and the results are visible after just one session.",
+    author: 'SYLVIA K., 45 · TTDI',
+    stars: 5,
   },
 ]
 
 function StarRow({ count }: { count: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-1 justify-center">
       {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={12} className="text-gold fill-gold" />
+        <Star key={i} size={14} className="text-gold fill-gold" />
+      ))}
+    </div>
+  )
+}
+
+function SmallStarRow({ count }: { count: number }) {
+  return (
+    <div className="flex gap-1">
+      {Array.from({ length: count }).map((_, i) => (
+        <Star key={i} size={14} className="text-gold fill-gold" />
       ))}
     </div>
   )
@@ -42,108 +64,114 @@ function StarRow({ count }: { count: number }) {
 export default function Reviews() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [currentPage, setCurrentPage] = useState(0)
 
-  const featured = reviews.find(r => r.featured)!
-  const stacked = reviews.filter(r => !r.featured)
+  const itemsPerPage = 3
+  const totalPages = Math.ceil(smallReviews.length / itemsPerPage)
+
+  const nextPage = () => setCurrentPage((p) => (p + 1) % totalPages)
+  const prevPage = () => setCurrentPage((p) => (p - 1 + totalPages) % totalPages)
+
+  const currentReviews = smallReviews.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
 
   return (
-    <section id="reviews" ref={ref} className="bg-cream py-28 lg:py-36 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section id="reviews" ref={ref} className="bg-gradient-to-br from-[#398880] via-[#35615d] to-[#43443e] py-24 lg:py-32 overflow-hidden text-center flex flex-col items-center">
+      <div className="max-w-6xl mx-auto px-6 lg:px-10 flex flex-col items-center w-full">
         {/* Header */}
-        <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-4"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="flex items-center justify-center gap-4 mb-8"
         >
-          <span className="inline-block w-8 h-px bg-gold" />
-          What Our Clients Say
-        </motion.p>
-        <motion.h2
+          <span className="w-8 h-px bg-gold" />
+          <p className="font-body text-[10px] tracking-[0.25em] uppercase text-gold font-bold">
+            What Our Clients Say
+          </p>
+          <span className="w-8 h-px bg-gold hidden sm:block" />
+        </motion.div>
+
+        {/* Main Hero Quote */}
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1 }}
-          className="font-display text-4xl lg:text-5xl font-semibold text-dark mb-16 max-w-lg"
+          className="max-w-4xl mx-auto mb-6"
         >
-          Results That Speak for Themselves.
-        </motion.h2>
-
-        {/* Asymmetric masonry grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6">
-          {/* Featured: tall left card */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="lg:col-span-1 lg:row-span-2 bg-white border border-divider p-8 flex flex-col justify-between relative"
-          >
-            {/* Oversized quotation mark */}
-            <div className="absolute top-4 right-6 font-display text-[7rem] text-gold/10 leading-none select-none pointer-events-none">
-              "
-            </div>
-
-            <div>
-              <StarRow count={featured.stars} />
-              <p className="font-display text-xl font-semibold italic text-dark leading-relaxed mt-6 mb-8 relative z-10">
-                "{featured.text}"
-              </p>
-            </div>
-
-            <div className="border-t border-divider pt-6">
-              <div className="font-body text-sm font-medium text-dark">{featured.author}</div>
-              <div className="font-body text-xs text-muted mt-0.5">{featured.source}</div>
-            </div>
-          </motion.div>
-
-          {/* Right stacked cards */}
-          <div className="lg:col-span-2 flex flex-col gap-5 lg:gap-6">
-            {stacked.map((r, i) => (
-              <motion.div
-                key={r.id}
-                initial={{ opacity: 0, y: 32 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.2 + i * 0.12 }}
-                className="bg-white border border-divider p-8 flex flex-col gap-4 relative"
-              >
-                <div className="absolute top-4 right-6 font-display text-[5rem] text-gold/8 leading-none select-none pointer-events-none">
-                  "
-                </div>
-                <StarRow count={r.stars} />
-                <p className="font-body text-muted leading-relaxed text-sm">"{r.text}"</p>
-                <div className="border-t border-divider pt-4">
-                  <div className="font-body text-sm font-medium text-dark">{r.author}</div>
-                  <div className="font-body text-xs text-muted mt-0.5">{r.source}</div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="mb-8">
+            <StarRow count={5} />
           </div>
+          <blockquote className="font-display text-2xl sm:text-3xl lg:text-4xl italic text-white leading-relaxed mb-8">
+            "The thing about Ananaz is — they told me the truth. They didn't just sell me a package. Sam looked at my skin and told me exactly what it needed. First time in 10 years I actually trusted someone with my face."
+          </blockquote>
+          <p className="font-body text-[10px] tracking-[0.2em] uppercase text-gold">
+            — CLIENT, 47 · KUALA LUMPUR · VERIFIED REVIEW
+          </p>
+        </motion.div>
+
+        {/* Small Review Cards Slider */}
+        <div className="w-full mt-16 lg:mt-24 relative flex items-center justify-center">
+          {/* Left Arrow */}
+          <button 
+            onClick={prevPage}
+            className="absolute -left-4 lg:-left-12 z-20 w-12 h-12 rounded-full border border-gold/30 text-gold hover:bg-gold hover:text-white transition-colors flex items-center justify-center bg-[#35615d]/80 backdrop-blur-sm"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="w-full overflow-hidden px-4 py-2">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {currentReviews.map((r) => (
+                  <div
+                    key={r.id}
+                    className="border border-white/20 bg-white/5 rounded-xl p-8 flex flex-col text-left gap-6 hover:bg-white/10 transition-colors duration-300 min-h-[260px]"
+                  >
+                    <SmallStarRow count={r.stars} />
+                    <p className="font-display italic text-white leading-relaxed text-lg lg:text-xl flex-grow">
+                      "{r.text}"
+                    </p>
+                    <div className="pt-2">
+                      <div className="font-body text-[10px] font-bold uppercase tracking-widest text-gold/80">{r.author}</div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right Arrow */}
+          <button 
+            onClick={nextPage}
+            className="absolute -right-4 lg:-right-12 z-20 w-12 h-12 rounded-full border border-gold/30 text-gold hover:bg-gold hover:text-white transition-colors flex items-center justify-center bg-[#35615d]/80 backdrop-blur-sm"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
 
+        {/* Google View More Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
-          className="mt-12 flex flex-col items-center gap-8"
+          className="mt-16"
         >
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <div className="flex gap-1" >
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={18} className="text-gold fill-gold" />
-              ))}
-            </div>
-            <span className="font-body text-sm text-muted">
-              Rated <strong className="text-dark">5★</strong> on Google & Facebook
-            </span>
-          </div>
-
           <a 
-            href="https://www.google.com/search?q=ananaz+medispa&oq=ananaz+medispa++&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYPTIGCAQQRRg90gEIOTU5MGowajmoAgCwAgA&sourceid=chrome&ie=UTF-8"
+            href="https://www.google.com/search?q=ananaz+medispa"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-premium px-8 py-3.5 text-[10px] font-bold tracking-[0.25em] uppercase inline-flex items-center gap-3 hover:translate-y-[-2px] hover:shadow-lg active:translate-y-0 transition-all duration-300"
+            className="inline-flex items-center gap-3 px-8 py-3.5 border border-gold text-gold font-body text-xs tracking-widest uppercase font-bold hover:bg-gold hover:text-white transition-colors rounded-full"
           >
-            View all on Google <ExternalLink size={12} />
+            View more on Google <ExternalLink size={14} />
           </a>
         </motion.div>
+
       </div>
     </section>
   )

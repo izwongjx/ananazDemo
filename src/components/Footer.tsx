@@ -6,15 +6,14 @@ const quickLinks = [
   { label: 'Home',       href: '/#home' },
   { label: 'Services',   href: '/#services' },
   { label: 'Products',   href: '/products' },
-  { label: 'Branches',   href: '/#branches' },
+  { label: 'Branches',   href: '/branches' },
   { label: 'Academy',    href: '/#academy' },
   { label: 'Booking',    href: '/booking' },
 ]
 
 const branches = [
-  { name: 'Cheras HQ', address: 'No. 26B, Lake Valley, Town Park 1, Jalan Suarasa 8/4, Batu 9, 43200 Cheras' },
-  { name: 'Bangi Section 9', address: '3B, Curve Business Park, 36A, Jalan Medan Pusat 2c, Section 9, 43650 Bandar Baru Bangi' },
-  { name: 'Bangi Section 7', address: '42A, 1, Jalan 7/7b, Section 7, 43650 Bandar Baru Bangi' },
+  { name: 'Bandar Tun Hussein Onn (BTHO)', address: 'No. 26B, Lake Valley, Town Park 1, Jalan Suarasa 8/4, Batu 9, 43200 Cheras' },
+  { name: 'Bangi', address: 'Bangi Section 9, 43650 Bandar Baru Bangi' },
 ]
 
 export default function Footer() {
@@ -86,11 +85,11 @@ export default function Footer() {
           <div>
             <h4 className="font-body text-xs tracking-[0.2em] uppercase text-gold mb-6">Enquire via WhatsApp</h4>
             <div className="space-y-3">
-              {([ ['cheras', 'Cheras HQ (+6016 329 8780)'], ['bangiS9', 'Bangi Section 9 (+6013 764 1998)'], ['bangiS7', 'Bangi Section 7 (+6016 330 4373)'] ] as const).map(
+              {([ ['btho', 'BTHO (+6014 332 2893)'], ['bangi', 'Bangi (+603 8920 8872)'] ] as const).map(
                 ([branch, label]) => (
                   <a
                     key={branch}
-                    href={waBranch(branch)}
+                    href={waBranch(branch as any)}
                     target="_blank"
                     rel="noopener noreferrer"
                     id={`footer-wa-${branch}`}
@@ -105,7 +104,7 @@ export default function Footer() {
 
             <Link
               to="/booking"
-              className="btn-premium btn-premium-solid shimmer w-full mt-6 flex items-center justify-center gap-2 bg-gold text-dark font-body text-xs font-semibold px-5 py-3 tracking-widest uppercase cursor-pointer"
+              className="btn-premium btn-premium-solid shimmer w-full mt-6 flex items-center justify-center gap-2 bg-gold text-off-white font-body text-xs font-semibold px-5 py-3 tracking-widest uppercase cursor-pointer"
             >
               Book Appointment
               <ArrowRight size={12} />

@@ -7,13 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#F8F6F1',
-        gold: '#B8963E',
-        dark: '#1A1A1A',
-        muted: '#6B6560',
-        divider: '#E8E2D9',
-        'gold-light': '#D4AF6A',
-        'gold-dark': '#8B6E2A',
+        cream: '#E9E2DF',
+        gold: '#DD9474',    // Terracotta (Primary Accent)
+        peach: '#EFBBA6',   // Peach (Lighter Accent)
+        dark: '#2C2621',
+        muted: '#8B7D72',
+        divider: '#D6CEC9', // Slightly darker than cream
+        'off-white': '#FDFBF7',
+        'teal-light': '#8EB7BB',
+        'teal': '#5A9BA2',
       },
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

@@ -1,149 +1,145 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Star, Infinity, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const reasons = [
   {
-    num: '01',
-    title: '20+ Years of Clinical Experience',
-    body: "We've seen every skin type, every concern. Nothing surprises us.",
+    id: 1,
+    highlight: '25+',
+    title: 'Years of Expertise',
+    body: 'Founded in 2000. The deepest skin expertise in this market.',
+    icon: null,
   },
   {
-    num: '02',
-    title: '10,000+ Customers Served',
-    body: 'Our results speak louder than our marketing.',
+    id: 2,
+    highlight: '4.9',
+    title: 'Star Rating',
+    body: 'Verified by thousands of real clients across Malaysia.',
+    icon: Star,
   },
   {
-    num: '03',
-    title: 'Certified Therapists',
-    body: 'Every treatment is performed by trained, certified professionals.',
+    id: 3,
+    highlight: '01',
+    title: 'Founder-Led Care',
+    body: 'Sam built this from her own skin struggle. She knows your pain personally.',
+    icon: null,
   },
   {
-    num: '04',
-    title: 'Treatments Tailored to You',
-    body: "No one-size-fits-all. Your skin is unique.",
+    id: 4,
+    highlight: null,
+    title: 'No Hard Selling',
+    body: 'We tell you what your skin needs - not what earns us the most.',
+    icon: Infinity,
   },
   {
-    num: '05',
-    title: '3 Convenient Branches',
-    body: 'Cheras, Bangi Seksyen 7 & 9. Always close to you.',
+    id: 5,
+    highlight: null,
+    title: 'Post-Visit Follow-Up',
+    body: "We check in on WhatsApp after every treatment. Because your skin doesn't stop.",
+    icon: MessageCircle,
   },
-]
-
-const floatingStats = [
-  { num: '20+', label: 'Years' },
-  { num: '10K', label: 'Clients' },
-  { num: '3',   label: 'Branches' },
 ]
 
 export default function WhyAnanaz() {
   const ref = useRef(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef
+      const scrollAmount = current.clientWidth * 0.8
+      current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' })
+    }
+  }
+
   return (
-    <section id="why" ref={ref} className="bg-cream py-28 lg:py-36 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section id="why" ref={ref} className="bg-[#386F70] py-24 lg:py-32 overflow-x-clip relative">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-10">
+        
         {/* Header */}
-        <motion.p
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-4"
-        >
-          <span className="inline-block w-8 h-px bg-gold" />
-          Why Choose Us
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1 }}
-          className="font-display text-4xl lg:text-5xl font-semibold text-dark mb-16 lg:mb-20 max-w-lg"
-        >
-          Five Reasons Thousands Trust Ananaz.
-        </motion.h2>
-
-        {/* Two-column on desktop, single column on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-
-          {/* Left: Staircase items */}
-          <div className="flex flex-col gap-8">
-            {reasons.map((r, i) => (
-              <motion.div
-                key={r.num}
-                initial={{ opacity: 0, x: -32 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="why-item relative flex items-start gap-8 max-w-xl"
-              >
-                {/* Faded number behind */}
-                <span
-                  className="absolute -left-10 top-1/2 -translate-y-1/2 font-display text-[6rem] font-semibold text-gold/8 leading-none select-none pointer-events-none"
-                  aria-hidden
-                >
-                  {r.num}
-                </span>
-
-                {/* Gold left border */}
-                <div className="flex-shrink-0 w-px self-stretch bg-gold/40 ml-2" />
-
-                <div className="pl-4 py-2">
-                  <div className="font-body text-[10px] tracking-[0.22em] uppercase text-gold mb-2">{r.num}</div>
-                  <h3 className="font-display text-xl lg:text-2xl font-semibold text-dark mb-2">{r.title}</h3>
-                  <p className="font-body text-muted text-sm leading-relaxed">{r.body}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right: Visual panel — desktop only */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative hidden lg:block"
+        <div className="text-center mb-16 lg:mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            className="flex items-center justify-center gap-4 mb-6"
           >
-            {/* Main tall image */}
-            <div className="img-placeholder w-full h-[560px] relative overflow-hidden">
-              {/* Gold corner accent top-right */}
-              <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-gold/70 pointer-events-none z-10" />
-              {/* Gold corner accent bottom-left */}
-              <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-gold/70 pointer-events-none z-10" />
-            </div>
-
-            {/* Floating pull quote — overlaps top-left of image */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="absolute -left-10 top-10 bg-cream shadow-2xl border-l-2 border-gold px-6 py-5 max-w-[220px] z-20"
-            >
-              <p className="font-display text-base italic text-dark leading-snug">
-                "The skin you deserve is within reach."
-              </p>
-              <div className="mt-3 font-body text-[10px] tracking-widest uppercase text-gold">— Pn Samsinar</div>
-            </motion.div>
-
-            {/* Floating stats row — overlaps bottom of image */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="absolute -bottom-6 left-8 right-0 bg-dark flex z-20"
-            >
-              {floatingStats.map(({ num, label }, i) => (
-                <div
-                  key={label}
-                  className={`flex-1 px-5 py-5 text-center ${i < floatingStats.length - 1 ? 'border-r border-white/10' : ''}`}
-                >
-                  <div className="font-display text-2xl font-semibold text-gold leading-none">{num}</div>
-                  <div className="font-body text-[10px] tracking-widest uppercase text-white/40 mt-1">{label}</div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Vertical gold accent line — far right */}
-            <div className="absolute -right-6 top-16 bottom-16 w-px bg-gradient-to-b from-transparent via-gold/40 to-transparent" />
+            <span className="w-12 h-px bg-gold/50" />
+            <h2 className="font-body text-[10px] tracking-[0.3em] uppercase text-gold font-bold">Why Ananaz</h2>
+            <span className="w-12 h-px bg-gold/50" />
           </motion.div>
-
+          
+          <motion.h3 
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="font-display text-3xl lg:text-5xl font-semibold text-white"
+          >
+            5 reasons women choose <span className="italic text-gold font-light">Ananaz</span>
+          </motion.h3>
         </div>
+
+        {/* 5-Column Grid Layout Desktop / Horizontal Scroll Mobile */}
+        <div ref={scrollRef} className="flex overflow-x-auto md:grid md:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6 pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory hide-scrollbar scroll-smooth">
+          {reasons.map((r, i) => (
+            <motion.div
+              key={r.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+              className="w-[75vw] sm:w-[280px] md:w-auto flex-shrink-0 snap-center bg-white/5 border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center hover:bg-white/10 hover:border-gold/30 hover:-translate-y-2 transition-all duration-500 group"
+            >
+              {/* Highlight / Icon Area */}
+              <div className="h-20 flex items-center justify-center mb-6 text-gold">
+                {r.highlight && r.icon === Star ? (
+                  <div className="flex items-start gap-1">
+                    <span className="font-display text-5xl font-medium tracking-tight leading-none">{r.highlight}</span>
+                    <r.icon size={24} className="fill-gold mt-1" />
+                  </div>
+                ) : r.highlight ? (
+                  <span className="font-display text-5xl font-medium tracking-tight leading-none">{r.highlight}</span>
+                ) : r.icon ? (
+                  <r.icon size={56} strokeWidth={1.5} className="group-hover:scale-110 transition-transform duration-500" />
+                ) : null}
+              </div>
+
+              {/* Title & Body */}
+              <h4 className="font-body text-sm font-bold text-white uppercase tracking-wider mb-4 group-hover:text-gold transition-colors duration-300">
+                {r.title}
+              </h4>
+              
+              <p className="font-body text-[13px] text-white leading-relaxed">
+                {r.body}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Mobile Navigation Controls */}
+        <div className="flex items-center justify-center gap-4 mt-2 md:hidden">
+          <button 
+            onClick={() => scroll('left')}
+            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-gold hover:border-gold transition-colors"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button 
+            onClick={() => scroll('right')}
+            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-gold hover:border-gold transition-colors"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+      </div>
+
+      {/* Decorative Divider seamlessly between sections */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 flex items-center justify-center w-[300px]">
+        <div className="flex-1 h-px bg-gold"></div>
+        <div className="px-4 text-gold text-xs leading-none">◆</div>
+        <div className="flex-1 h-px bg-gold"></div>
       </div>
     </section>
   )

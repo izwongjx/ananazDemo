@@ -1,8 +1,9 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShoppingBag } from 'lucide-react'
 import { waProduct } from '../lib/whatsapp'
+import { useCart } from '../context/CartContext'
 
 const products = [
   { id: 'mawar', name: 'Mawar Lourve Serum', price: 'RM45', tag: 'For All Skin Types' },
@@ -11,6 +12,7 @@ const products = [
 ]
 
 export default function Products() {
+  const { addItem, setIsCartOpen } = useCart()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -80,19 +82,20 @@ export default function Products() {
                       </motion.span>
                     </Link>
 
-                    <a
-                      href={waProduct(p.name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => {
+                        addItem({ id: p.id, name: p.name, price: p.price })
+                        setIsCartOpen(true)
+                      }}
                     >
                       <motion.span
                         whileTap={{ scale: 0.96 }}
                         className="btn-premium btn-premium-solid shimmer px-4 py-2 text-[10px] tracking-widest uppercase font-bold cursor-pointer flex items-center gap-2"
                       >
-                        Enquire More
-                        <ArrowRight size={12} />
+                        Add to Cart
+                        <ShoppingBag size={12} />
                       </motion.span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

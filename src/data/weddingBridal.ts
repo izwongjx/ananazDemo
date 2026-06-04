@@ -4,7 +4,7 @@ export const weddingBridalPackages = [
     num: '01',
     name: 'Mini Puteri Package',
     tag: 'Pre-Wedding',
-    tagColor: 'bg-gold text-white',
+    tagColor: 'bg-gold text-off-white',
     price: 'RM 229',
     original: 'RM 250',
     duration: '3 hours',

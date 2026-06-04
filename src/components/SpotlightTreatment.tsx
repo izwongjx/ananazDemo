@@ -23,7 +23,7 @@ export default function SpotlightTreatment() {
       {/* Background pattern */}
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+        style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }}
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
@@ -124,7 +124,7 @@ export default function SpotlightTreatment() {
             </div>
 
             {/* Price badge */}
-            <div className="absolute top-6 right-6 bg-gold/95 text-dark px-4 py-3 text-center">
+            <div className="absolute top-6 right-6 bg-gold/95 text-off-white px-4 py-3 text-center">
               <div className="font-display text-2xl font-semibold">RM199</div>
               <div className="font-body text-[10px] tracking-wide line-through opacity-60">was RM330</div>
             </div>

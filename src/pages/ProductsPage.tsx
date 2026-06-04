@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  ArrowLeft, ArrowRight, X, Check, Droplets, FlaskConical, Sparkles, CheckCircle2,
+  ArrowLeft, ArrowRight, X, Check, Droplets, FlaskConical, Sparkles, CheckCircle2, ShoppingBag, ExternalLink
 } from 'lucide-react'
 import { waProduct, waGeneral } from '../lib/whatsapp'
+import { useCart } from '../context/CartContext'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -17,10 +18,11 @@ const products = [
     size: '10ml',
     price: 'RM45',
     icon: Droplets,
-    tagColor: 'bg-gold text-white',
+    tagColor: 'bg-gold text-off-white',
     shortDesc: 'A lightweight face serum with high concentrations of active ingredients targeting specific skin concerns — hydration, ageing, acne, or pigmentation.',
     description: 'Face serum is a lightweight skin care product containing high concentrations of active ingredients to target specific skin concerns such as hydration, ageing, acne, or pigmentation. The light texture is easily absorbed by the skin for faster results.',
     descriptionEn: 'A lightweight face serum with high concentrations of active ingredients targeting specific skin concerns — hydration, ageing, acne, or pigmentation. The light texture is easily absorbed for faster visible results.',
+    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
     keyIngredients: [
       { name: 'Castor Oil', role: 'The Moisture Lock', benefit: 'Deeply moisturizes and helps prevent moisture loss. Anti-inflammatory and anti-bacterial, promoting rapid skin healing.' },
       { name: 'Tamanu Oil', role: 'The Skin Renewer', benefit: 'Promotes the production of new cells. Effective for healing wounds, scars, and burns.' },
@@ -46,6 +48,7 @@ const products = [
     shortDesc: 'A powerful antioxidant serum that combats signs of ageing, minimises sensitivity, and brightens over time — vegan-certified and gentle on reactive skin.',
     description: 'Bakuchiol has soothing properties that help calm the skin and minimize issues related to sensitivity and reactivity. It is also a powerful antioxidant that helps fight signs of ageing.',
     descriptionEn: 'Bakuchiol has calming properties that soothe the skin and minimise sensitivity. A powerful antioxidant that combats signs of ageing — fine lines and loss of firmness — by targeting free radicals.',
+    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
     keyIngredients: [
       { name: 'Meadowfoam Seed', role: 'The Fast Absorber', benefit: 'Fast-absorbing moisture without a greasy residue. Smoothes skin texture and is non-comedogenic.' },
       { name: 'Vitamin C', role: 'The Brightener', benefit: 'Brightens skin and helps treat pigmentation. Stimulates collagen production and provides anti-ageing benefits.' },
@@ -66,10 +69,11 @@ const products = [
     size: '50gm',
     price: 'RM65',
     icon: FlaskConical,
-    tagColor: 'bg-[#5C5C5C] text-white',
+    tagColor: 'bg-muted text-white',
     shortDesc: 'An overnight sleeping mask that works while you sleep — maintaining skin moisture, supporting the repair process, and leaving skin softer and more radiant by morning.',
     description: 'A sleeping mask used at night before sleep. Helps maintain moisture throughout the night, making skin softer and more hydrated while aiding the skin\'s natural repair process.',
     descriptionEn: 'A nighttime skincare product applied before sleep. Maintains skin moisture throughout the night and supports the skin repair process by delivering nutrients and active ingredients while you sleep.',
+    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
     keyIngredients: [
       { name: 'Jojoba', role: 'The Hydrator', benefit: 'Maintains skin moisture with anti-inflammatory and antioxidant properties. Enriched with vitamins E & B.' },
       { name: 'Aloe Vera', role: 'The Soother', benefit: 'Accelerates wound healing and treats scars. Relieves skin irritation with anti-inflammatory benefits.' },
@@ -99,6 +103,7 @@ type Product = typeof products[0]
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ProductsPage() {
+  const { addItem, setIsCartOpen, totalItems } = useCart()
   const [selected, setSelected] = useState<Product | null>(null)
   const [activeTab, setActiveTab] = useState<'ingredients' | 'usage'>('ingredients')
 
@@ -114,23 +119,13 @@ export default function ProductsPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-
-      {/* Back nav */}
-      <div className="fixed top-6 left-6 z-50">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 bg-cream/90 backdrop-blur-sm border border-divider px-4 py-2 font-body text-xs font-medium text-dark hover:border-gold hover:text-gold transition-all duration-300"
-        >
-          <ArrowLeft size={13} />
-          Back to Home
-        </Link>
-      </div>
+      {/* ── HERO ─────────────────────────────────────────────────────── */}
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="bg-dark relative overflow-hidden pt-36 pb-24">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }}
         />
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <motion.p
@@ -146,7 +141,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl lg:text-7xl font-semibold text-white leading-[1.08] max-w-3xl mb-6"
+            className="font-display text-5xl lg:text-7xl font-semibold text-off-white leading-[1.08] max-w-3xl mb-6"
           >
             Skincare Built on<br />
             <span className="text-gold italic">Real Ingredients.</span>
@@ -155,7 +150,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="font-body text-white/55 text-base leading-relaxed max-w-lg"
+            className="font-body text-off-white/55 text-base leading-relaxed max-w-lg"
           >
             Each Sinarosa product is formulated with clinically chosen ingredients — verified, transparent, and results-focused. No fillers. No guesswork.
           </motion.p>
@@ -174,7 +169,7 @@ export default function ProductsPage() {
           <h2 className="font-display text-3xl lg:text-4xl font-semibold text-dark">3 Signature Formulas</h2>
         </motion.div>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           {products.map((p, i) => {
             const Icon = p.icon
             return (
@@ -184,53 +179,57 @@ export default function ProductsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.7 }}
-                className={`group flex flex-col ${i % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} bg-white border border-divider hover:border-gold transition-colors duration-300 overflow-hidden min-h-[300px]`}
+                className="group flex flex-col bg-cream border border-divider hover:border-gold hover:shadow-lg transition-all duration-300 overflow-hidden h-full"
               >
                 {/* Image */}
-                <div className="relative lg:w-[38%] h-56 lg:h-auto overflow-hidden flex-shrink-0">
-                  <div className="img-placeholder w-full h-full bg-[#E8E2D9] group-hover:scale-105 transition-transform duration-700" />
-                  <span className={`absolute top-5 left-5 ${p.tagColor} font-body text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5`}>
+                <div className="relative w-full aspect-square overflow-hidden flex-shrink-0">
+                  <div className="img-placeholder w-full h-full bg-divider group-hover:scale-105 transition-transform duration-700" />
+                  <span className={`absolute top-3 left-3 lg:top-5 lg:left-5 ${p.tagColor} font-body text-[8px] lg:text-[10px] font-bold tracking-[0.2em] uppercase px-2 py-1 lg:px-3 lg:py-1.5`}>
                     {p.category}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col justify-between p-10 lg:p-12 flex-1">
-                  <div>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-7 h-7 bg-gold/10 flex items-center justify-center">
+                <div className="flex flex-col flex-1 p-4 lg:p-8">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 lg:gap-3 mb-2 lg:mb-4">
+                      <div className="hidden lg:flex w-7 h-7 bg-gold/10 items-center justify-center">
                         <Icon size={13} className="text-gold" />
                       </div>
-                      <span className="font-body text-[10px] tracking-widest uppercase text-muted">{p.brand} · {p.size}</span>
+                      <span className="font-body text-[9px] lg:text-[10px] tracking-widest uppercase text-muted">
+                        <span className="hidden lg:inline">{p.brand} · </span>{p.size}
+                      </span>
                     </div>
-                    <h3 className="font-display text-2xl lg:text-3xl font-semibold text-dark leading-tight mb-3">
+                    <h3 className="font-display text-sm sm:text-base lg:text-2xl font-semibold text-dark leading-tight mb-2 lg:mb-3 group-hover:text-gold transition-colors duration-300 line-clamp-2">
                       {p.name}
                     </h3>
-                    <p className="font-body text-sm text-muted leading-relaxed max-w-sm">
-                      {p.shortDesc}
-                    </p>
                   </div>
 
-                  <div className="mt-8 flex items-end justify-between gap-6 flex-wrap">
-                    <div>
-                      <p className="font-body text-[10px] uppercase tracking-widest text-muted mb-1">Price</p>
-                      <p className="font-display text-3xl font-semibold text-gold leading-none">{p.price}</p>
+                  <div className="mt-auto pt-3 lg:pt-6 border-t border-divider">
+                    <div className="mb-3 lg:mb-6 flex justify-between items-end">
+                      <div>
+                        <p className="hidden lg:block font-body text-[10px] uppercase tracking-widest text-muted mb-1">Price</p>
+                        <p className="font-display text-lg lg:text-3xl font-semibold text-gold leading-none">{p.price}</p>
+                      </div>
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex flex-col gap-2 lg:gap-3">
                       <button
                         onClick={() => openDrawer(p)}
-                        className="btn-premium btn-premium-outline px-7 py-3 text-xs tracking-widest uppercase font-bold"
+                        className="w-full btn-premium btn-premium-outline py-2 lg:py-3 text-[10px] lg:text-xs tracking-widest uppercase font-bold"
                       >
                         Details
                       </button>
-                      <a
-                        href={waProduct(p.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-premium btn-premium-solid shimmer px-7 py-3 text-xs font-bold flex items-center gap-2"
+                      <button
+                        onClick={() => {
+                          addItem({ id: p.id, name: p.name, price: p.price })
+                          setIsCartOpen(true)
+                        }}
+                        className="w-full btn-premium btn-premium-solid shimmer py-2 lg:py-3 text-[10px] lg:text-xs font-bold flex items-center justify-center gap-2"
                       >
-                        Order <ArrowRight size={13} />
-                      </a>
+                        <span className="hidden sm:inline">Add to Cart</span>
+                        <span className="sm:hidden">Add</span>
+                        <ShoppingBag size={12} className="lg:w-[13px] lg:h-[13px]" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -241,7 +240,7 @@ export default function ProductsPage() {
       </section>
 
       {/* ── ROUTINES ──────────────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 bg-white border-t border-divider">
+      <section className="py-28 lg:py-36 bg-cream border-t border-divider">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -308,10 +307,10 @@ export default function ProductsPage() {
           viewport={{ once: true }}
         >
           <p className="font-body text-xs tracking-[0.2em] uppercase text-gold mb-4">Distributed by Ananaz MediSpa</p>
-          <p className="font-body text-white/40 text-sm max-w-md mx-auto leading-relaxed">
+          <p className="font-body text-off-white/40 text-sm max-w-md mx-auto leading-relaxed">
             All Sinarosa products are available for order via WhatsApp. We'll confirm stock and arrange delivery or branch pickup.
           </p>
-          <p className="font-body text-white/25 text-xs mt-4">www.ananaz.my</p>
+          <p className="font-body text-off-white/25 text-xs mt-4">www.ananaz.my</p>
         </motion.div>
       </section>
 
@@ -331,10 +330,10 @@ export default function ProductsPage() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full w-full max-w-xl bg-white z-50 overflow-y-auto shadow-2xl"
+              className="fixed top-0 right-0 h-full w-full max-w-xl bg-cream z-50 overflow-y-auto shadow-2xl"
             >
               {/* Drawer header */}
-              <div className="sticky top-0 bg-white border-b border-divider px-8 py-6 flex items-start justify-between gap-4 z-10">
+              <div className="sticky top-0 bg-cream border-b border-divider px-8 py-6 flex items-start justify-between gap-4 z-10">
                 <div className="flex-1">
                   <p className="font-body text-[10px] tracking-[0.3em] uppercase text-gold font-bold mb-1">{selected.brand} · {selected.size}</p>
                   <h2 className="font-display text-xl font-semibold text-dark leading-tight">{selected.name}</h2>
@@ -349,7 +348,7 @@ export default function ProductsPage() {
 
               <div className="p-8 space-y-8">
                 {/* Image */}
-                <div className="aspect-video bg-[#E8E2D9] rounded-xl overflow-hidden">
+                <div className="aspect-video bg-divider rounded-xl overflow-hidden">
                   <div className="img-placeholder w-full h-full" />
                 </div>
 
@@ -416,14 +415,23 @@ export default function ProductsPage() {
                 </div>
 
                 {/* CTA */}
-                <div className="border-t border-divider pt-8">
-                  <a
-                    href={waProduct(selected.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="border-t border-divider pt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <button
+                    onClick={() => {
+                      addItem({ id: selected.id, name: selected.name, price: selected.price })
+                      setIsCartOpen(true)
+                    }}
                     className="w-full btn-premium btn-premium-solid py-4 text-xs tracking-widest uppercase font-bold flex items-center justify-center gap-2"
                   >
-                    Order via WhatsApp — {selected.price} <ArrowRight size={13} />
+                    Add to Cart <ShoppingBag size={14} />
+                  </button>
+                  <a
+                    href={selected.shopeeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full btn-premium btn-premium-outline py-4 text-xs tracking-widest uppercase font-bold flex items-center justify-center gap-2"
+                  >
+                    View on Shopee <ExternalLink size={14} />
                   </a>
                 </div>
               </div>

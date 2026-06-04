@@ -33,21 +33,21 @@ export default function WeddingBridalDetailPage() {
   const prev = weddingBridalPackages[(currentIndex - 1 + weddingBridalPackages.length) % weddingBridalPackages.length]
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-cream min-h-screen">
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="bg-dark relative overflow-hidden pt-36 pb-28">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
-        <span className="absolute right-10 bottom-0 font-display text-[20vw] font-bold text-white/[0.03] leading-none select-none pointer-events-none">
+        <span className="absolute right-10 bottom-0 font-display text-[20vw] font-bold text-off-white/[0.03] leading-none select-none pointer-events-none">
           {t.num}
         </span>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <Link to="/services/wedding-bridal"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-gold font-body text-xs font-medium transition-colors mb-10 group">
+            className="inline-flex items-center gap-2 text-off-white/40 hover:text-gold font-body text-xs font-medium transition-colors mb-10 group">
             <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
             All Bridal Packages
           </Link>
@@ -62,14 +62,14 @@ export default function WeddingBridalDetailPage() {
               </motion.div>
               <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-4xl lg:text-5xl font-semibold text-white leading-[1.1] max-w-2xl">
+                className="font-display text-4xl lg:text-5xl font-semibold text-off-white leading-[1.1] max-w-2xl">
                 {t.name}
               </motion.h1>
             </div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
               className="flex gap-3 flex-wrap">
               <div className="border border-white/15 px-6 py-4">
-                <p className="font-body text-[10px] uppercase tracking-widest text-white/40 mb-1">Price</p>
+                <p className="font-body text-[10px] uppercase tracking-widest text-off-white/40 mb-1">Price</p>
                 <p className="font-display text-2xl font-semibold text-gold leading-none">{t.price}</p>
               </div>
             </motion.div>
@@ -82,7 +82,7 @@ export default function WeddingBridalDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <FadeUp>
             <div className="relative">
-              <div className="img-placeholder w-full aspect-[4/5] bg-[#E8E2D9]" />
+              <div className="img-placeholder w-full aspect-[4/5] bg-divider" />
             </div>
           </FadeUp>
           <div className="lg:pt-6">
@@ -155,7 +155,7 @@ export default function WeddingBridalDetailPage() {
 
           <FadeUp delay={0.3} className="hidden lg:block sticky top-32">
             <div className="relative">
-              <div className="img-placeholder w-full aspect-[3/4] bg-[#E8E2D9]" />
+              <div className="img-placeholder w-full aspect-[3/4] bg-divider" />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 border border-gold/20 -z-10" />
             </div>
           </FadeUp>
@@ -198,7 +198,7 @@ export default function WeddingBridalDetailPage() {
               <MessageCircle size={15} /> Book via WhatsApp
             </a>
             <Link to="/booking"
-              className="inline-flex items-center justify-center gap-2 border border-dark/10 text-dark font-body text-[11px] font-bold px-20 py-5 tracking-[0.2em] uppercase hover:border-gold hover:text-gold transition-colors w-full sm:w-auto">
+              className="inline-flex items-center justify-center gap-2 bg-gold text-off-white font-body text-[11px] font-bold px-20 py-5 tracking-[0.2em] uppercase hover:bg-peach transition-colors w-full sm:w-auto shadow-lg shadow-gold/20">
               Schedule Online <ArrowRight size={14} />
             </Link>
           </div>

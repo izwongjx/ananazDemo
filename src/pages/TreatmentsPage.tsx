@@ -43,17 +43,8 @@ export default function TreatmentsPage() {
   }, [hash])
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen text-dark selection:bg-gold/20">
-      {/* Navigation */}
-      <div className="fixed top-6 left-6 z-50">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-divider px-5 py-2.5 font-body text-xs font-semibold tracking-wider text-dark hover:border-gold hover:text-gold transition-all duration-300 shadow-sm"
-        >
-          <ArrowLeft size={14} />
-          BACK TO HOME
-        </Link>
-      </div>
+    <div className="bg-[#FAF9F6] min-h-screen text-dark selection:bg-gold/20 pt-24">
+
 
       {/* ── SECTION 01: HERO / INTRO ──────────────────────────────── */}
       <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-10 max-w-7xl mx-auto">

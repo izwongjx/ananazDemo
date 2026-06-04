@@ -103,8 +103,8 @@ export default function AboutPage() {
   const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
 
   return (
-    <div className="bg-cream min-h-screen">
-      <Navbar />
+    <div className="bg-cream min-h-screen pt-24">
+
 
       {/* ── HERO ──────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-end overflow-hidden bg-dark">
@@ -114,7 +114,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-dark/70 pointer-events-none" />
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '36px 36px' }}
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '36px 36px' }}
         />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-24 pt-40">
           <motion.p
@@ -130,7 +130,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl lg:text-7xl xl:text-8xl font-semibold text-white leading-[1.05] max-w-4xl mb-6"
+            className="font-display text-5xl lg:text-7xl xl:text-8xl font-semibold text-off-white leading-[1.05] max-w-4xl mb-6"
           >
             Two Decades of Trust.<br />
             <span className="text-gold italic">One Unwavering Mission.</span>
@@ -139,7 +139,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="font-body text-white/60 text-lg leading-relaxed max-w-xl"
+            className="font-body text-off-white/60 text-lg leading-relaxed max-w-xl"
           >
             The story of Ananaz MediSpa — built on expertise, grown through community, and driven by results that speak for themselves.
           </motion.p>
@@ -186,12 +186,12 @@ export default function AboutPage() {
       <section className="py-28 lg:py-36 bg-dark relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }}
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }}
         />
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <FadeUp>
             <SectionLabel>Our Journey</SectionLabel>
-            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-white mb-20 max-w-xl">
+            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-off-white mb-20 max-w-xl">
               25 Years in the Making.
             </h2>
           </FadeUp>
@@ -225,13 +225,13 @@ export default function AboutPage() {
                 <div className="relative bg-white border border-divider overflow-hidden flex flex-col h-full">
                   <div className="flex h-64 border-b border-divider overflow-hidden">
                     <div className="flex-1 relative overflow-hidden group-hover:scale-105 transition-transform duration-700">
-                      <div className="img-placeholder w-full h-full bg-[#E8E2D9]" />
-                      <span className="absolute bottom-3 left-3 bg-dark/70 text-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">Before</span>
+                      <div className="img-placeholder w-full h-full bg-divider" />
+                      <span className="absolute bottom-3 left-3 bg-dark/70 text-off-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">Before</span>
                     </div>
                     <div className="w-px bg-divider z-10" />
                     <div className="flex-1 relative overflow-hidden group-hover:scale-105 transition-transform duration-700 delay-[50ms]">
-                      <div className="img-placeholder w-full h-full bg-[#F3F1ED]" />
-                      <span className="absolute bottom-3 right-3 bg-gold/90 text-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">After</span>
+                      <div className="img-placeholder w-full h-full bg-divider" />
+                      <span className="absolute bottom-3 right-3 bg-gold/90 text-off-white text-[9px] uppercase tracking-widest px-2 py-1 backdrop-blur-sm">After</span>
                     </div>
                   </div>
                   <div className="p-6">
@@ -257,7 +257,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── MEET THE TEAM ─────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 bg-[#F3EFE8]">
+      <section className="py-28 lg:py-36 bg-cream">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp>
             <SectionLabel>Meet the Team</SectionLabel>
@@ -293,14 +293,14 @@ export default function AboutPage() {
       <section className="py-28 bg-dark text-center relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '36px 36px' }}
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '36px 36px' }}
         />
         <FadeUp className="relative z-10">
           <SectionLabel>Ready to Begin?</SectionLabel>
-          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-white mb-6 max-w-lg mx-auto leading-tight">
+          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-off-white mb-6 max-w-lg mx-auto leading-tight">
             Confidence starts with a single message.
           </h2>
-          <p className="font-body text-white/50 text-base mb-10 max-w-md mx-auto leading-relaxed">
+          <p className="font-body text-off-white/50 text-base mb-10 max-w-md mx-auto leading-relaxed">
             WhatsApp us to book a consultation, enquire about a treatment, or simply ask — we're always here.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -308,7 +308,7 @@ export default function AboutPage() {
               href={waGeneral()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-premium px-10 py-5 text-[11px] font-bold tracking-[0.2em] uppercase inline-flex items-center gap-3"
+              className="btn-premium btn-premium-solid shimmer px-10 py-5 text-[11px] font-bold tracking-[0.2em] uppercase inline-flex items-center gap-3"
             >
               <MessageCircle size={15} />
               WhatsApp Us
@@ -317,7 +317,6 @@ export default function AboutPage() {
         </FadeUp>
       </section>
 
-      <Footer />
     </div>
   )
 }

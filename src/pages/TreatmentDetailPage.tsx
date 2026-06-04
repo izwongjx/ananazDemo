@@ -37,22 +37,22 @@ export default function TreatmentDetailPage() {
   const prev = skinTreatments[(currentIndex - 1 + skinTreatments.length) % skinTreatments.length]
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
+    <div className="bg-cream min-h-screen">
       <Navbar />
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="bg-dark relative overflow-hidden pt-36 pb-28">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#B8963E 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+          style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
         {/* Watermark number */}
-        <span className="absolute right-10 bottom-0 font-display text-[20vw] font-bold text-white/[0.03] leading-none select-none pointer-events-none">
+        <span className="absolute right-10 bottom-0 font-display text-[20vw] font-bold text-off-white/[0.03] leading-none select-none pointer-events-none">
           {t.num}
         </span>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <Link to="/skin-treatments"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-gold font-body text-xs font-medium transition-colors mb-10 group">
+            className="inline-flex items-center gap-2 text-off-white/40 hover:text-gold font-body text-xs font-medium transition-colors mb-10 group">
             <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
             All Skin Treatments
           </Link>
@@ -68,7 +68,7 @@ export default function TreatmentDetailPage() {
 
               <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-4xl lg:text-6xl font-semibold text-white leading-[1.1] max-w-2xl">
+                className="font-display text-4xl lg:text-6xl font-semibold text-off-white leading-[1.1] max-w-2xl">
                 {t.name}
               </motion.h1>
             </div>
@@ -77,7 +77,7 @@ export default function TreatmentDetailPage() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
               className="flex gap-3 flex-wrap">
               <div className="border border-white/15 px-6 py-4">
-                <p className="font-body text-[10px] uppercase tracking-widest text-white/40 mb-1">Price</p>
+                <p className="font-body text-[10px] uppercase tracking-widest text-off-white/40 mb-1">Price</p>
                 <p className="font-display text-2xl font-semibold text-gold leading-none">{t.price}</p>
               </div>
             </motion.div>
@@ -92,7 +92,7 @@ export default function TreatmentDetailPage() {
           {/* Image */}
           <FadeUp>
             <div className="relative">
-              <div className="img-placeholder w-full aspect-[4/5] bg-[#E8E2D9]" />
+              <div className="img-placeholder w-full aspect-[4/5] bg-divider" />
               <div className="absolute top-6 left-6">
                 <span className={`${t.tagColor} font-body text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1.5`}>{t.tag}</span>
               </div>
@@ -108,15 +108,24 @@ export default function TreatmentDetailPage() {
               </p>
             </FadeUp>
             <FadeUp delay={0.25}>
-              <div className="flex gap-3 flex-wrap">
-                <a href={waBook(t.name)} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-dark text-cream font-body text-xs font-medium px-7 py-4 tracking-wide uppercase hover:bg-gold transition-colors duration-300">
-                  <MessageCircle size={14} /> Book This Treatment
-                </a>
-                <Link to="/booking"
-                  className="inline-flex items-center gap-2 border border-dark/20 text-dark font-body text-xs font-medium px-7 py-4 tracking-wide uppercase hover:border-gold hover:text-gold transition-colors duration-300">
-                  Schedule Online
-                </Link>
+              <div className="flex flex-col gap-6">
+                <div className="bg-gold/10 border border-gold/30 p-5 lg:p-6 max-w-lg relative overflow-hidden mb-2">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+                  <p className="font-body text-[10px] text-gold tracking-[0.25em] uppercase font-bold mb-2 flex items-center gap-2 relative z-10">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" /> Full Package Available
+                  </p>
+                  <p className="font-body text-sm text-dark/80 leading-relaxed relative z-10">
+                    For an even deeper transformation, we offer full-on custom packages that include more treatments at better pricing. 
+                    An initial in-centre consultation is required to tailor the perfect plan for your skin.
+                  </p>
+                </div>
+
+                <div className="flex gap-3 flex-wrap">
+                  <a href={waBook(`Free Consultation for ${t.name}`)} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gold text-off-white font-body text-xs font-medium px-7 py-4 tracking-wide uppercase hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/20 hover:bg-peach transition-all duration-300">
+                    <MessageCircle size={14} /> Book A Free Consultation
+                  </a>
+                </div>
               </div>
             </FadeUp>
           </div>
@@ -182,7 +191,7 @@ export default function TreatmentDetailPage() {
 
           <FadeUp delay={0.3} className="hidden lg:block sticky top-32">
             <div className="relative">
-              <div className="img-placeholder w-full aspect-[3/4] bg-[#E8E2D9]" />
+              <div className="img-placeholder w-full aspect-[3/4] bg-divider" />
               <div className="absolute -bottom-6 -left-6 w-32 h-32 border border-gold/20 -z-10" />
               <div className="absolute top-1/2 -right-10 -translate-y-1/2 font-display text-[12rem] text-dark/[0.03] select-none pointer-events-none rotate-90">
                 Process
@@ -223,14 +232,10 @@ export default function TreatmentDetailPage() {
       <section className="py-24">
         <FadeUp className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col items-center justify-center text-center">
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <a href={waBook(t.name)} target="_blank" rel="noopener noreferrer"
-              className="btn-premium btn-premium-solid shimmer px-20 py-5 text-[11px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-3 w-full sm:w-auto">
-              <MessageCircle size={15} /> Book via WhatsApp
+            <a href={waBook(`Free Consultation for ${t.name}`)} target="_blank" rel="noopener noreferrer"
+              className="btn-premium btn-premium-solid shimmer px-20 py-5 text-[11px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-3 w-full sm:w-auto hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/20 hover:bg-peach transition-all duration-300">
+              <MessageCircle size={15} /> Book A Free Consultation
             </a>
-            <Link to="/booking"
-              className="inline-flex items-center justify-center gap-2 border border-dark/10 text-dark font-body text-[11px] font-bold px-20 py-5 tracking-[0.2em] uppercase hover:border-gold hover:text-gold transition-colors w-full sm:w-auto">
-              Schedule Online <ArrowRight size={14} />
-            </Link>
           </div>
         </FadeUp>
       </section>

@@ -12,8 +12,8 @@ html {
 }
 
 body {
-  background-color: #F8F6F1;
-  color: #1A1A1A;
+  background-color: #E9E2DF;
+  color: #2C2621;
   font-family: 'DM Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,11 +25,21 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F6F1;
+  background: #FAF7F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #B8963E;
+  background: #DD9474;
   border-radius: 3px;
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* ── Typography Utilities ────────────────────────────────── */
@@ -54,7 +64,7 @@ body {
 
 /* ── Image Placeholder ───────────────────────────────────── */
 .img-placeholder {
-  background: linear-gradient(135deg, #E8E2D9 0%, #D4C9BC 100%);
+  background: linear-gradient(135deg, #E8DDD1 0%, #D2C5B8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,7 +79,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6B6560;
+  color: #4A6670;
   background: rgba(255,255,255,0.6);
   padding: 4px 10px;
   border-radius: 2px;
@@ -100,7 +110,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  border: 1px solid #B8963E;
+  border: 1px solid #DD9474;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -115,9 +125,9 @@ body {
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .product-card:hover {
-  border-color: #B8963E;
+  border-color: #DD9474;
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(184,150,62,0.1);
+  box-shadow: 0 20px 40px rgba(221, 148, 116, 0.15);
 }
 
 /* ── Premium Buttons ─────────────────────────────────────── */
@@ -131,22 +141,22 @@ body {
 }
 
 .btn-premium-solid {
-  background: #1A1A1A;
-  color: #F8F6F1;
+  background: #DD9474;
+  color: #FFFFFF;
 }
 .btn-premium-solid:hover {
-  background: #B8963E;
+  background: #EFBBA6;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(184, 150, 62, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(221, 148, 116, 0.4);
 }
 
 .btn-premium-outline {
-  border: 1px solid rgba(26, 26, 26, 0.1);
-  color: rgba(26, 26, 26, 0.6);
+  border: 1px solid #DD9474;
+  color: #DD9474;
 }
 .btn-premium-outline:hover {
-  border-color: #B8963E;
-  color: #B8963E;
+  border-color: #EFBBA6;
+  color: #EFBBA6;
   transform: translateY(-2px);
 }
 
@@ -177,7 +187,7 @@ body {
 
 /* ── Star rating ─────────────────────────────────────────── */
 .star-gold {
-  color: #B8963E;
+  color: #EFBBA6;
 }
 
 /* ── Nav link hover ──────────────────────────────────────── */
@@ -191,7 +201,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: #B8963E;
+  background: #DD9474;
   transition: width 0.3s ease;
 }
 .nav-link:hover::after {

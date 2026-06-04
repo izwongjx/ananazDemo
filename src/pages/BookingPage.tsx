@@ -1,16 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
-import { Calendar, Clock, MapPin, ArrowRight, ChevronDown, CheckCircle2 } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Calendar, Clock, MapPin, ArrowRight, ChevronDown } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { WA_NUMBERS, Branch, BRANCH_LABELS } from '../lib/whatsapp'
 
 const services = [
   'Skin Tag Removal',
   'Melasma Treatment',
   'Oil Cysts / Milia Treatment',
-  'Aromatherapy Spa',
-  'Traditional Body Massage',
+  'Aroma Therapy',
+  'Traditional Therapy',
+  'Face & Shoulder Therapy',
+  'Body Lulur',
+  'Ananaz Signature Special Scrub',
+  'Aromatherapy Sauna',
+  'Aura Herbal Hydrotherapy Bath',
+  'Hydrotherapy Bath',
+  'Milk / Flower Bath',
+  'Body Mask',
+  'Nerve Treatment',
   'Bridal Package',
   'Academy Inquiry',
   'General Consultation'
@@ -23,47 +33,39 @@ const fadeUp = {
 
 export default function BookingPage() {
   const navigate = useNavigate()
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
+  const location = useLocation()
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting'>('idle')
+  const [formData, setFormData] = useState({
+    name: '',
+    service: '',
+    branch: 'btho' as Branch,
+  })
+
+  // Pre-fill service from URL if present
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const serviceParam = params.get('service')
+    if (serviceParam) {
+      setFormData(prev => ({ ...prev, service: serviceParam }))
+    }
+  }, [location])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const getWaLink = () => {
+    const text = `Hi Ananaz, I'd like to book a free consultation.\n\nName: ${formData.name}\nService Interested: ${formData.service || 'Not specified'}\nPreferred Branch: ${BRANCH_LABELS[formData.branch]}`
+    return `https://wa.me/${WA_NUMBERS[formData.branch].replace(/[^0-9]/g, '')}?text=${encodeURIComponent(text)}`
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setFormStatus('submitting')
-    // Simulate API call
-    setTimeout(() => {
-      setFormStatus('success')
-    }, 1500)
-  }
-
-  if (formStatus === 'success') {
-    return (
-      <div className="bg-cream min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow flex items-center justify-center px-6">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="max-w-md w-full bg-white p-12 text-center shadow-sm border border-gold/10"
-          >
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                <CheckCircle2 size={40} />
-              </div>
-            </div>
-            <h2 className="font-display text-3xl font-semibold text-dark mb-4">Request Received.</h2>
-            <p className="font-body text-muted leading-relaxed mb-8">
-              Thank you for choosing Ananaz. Our team will review your preferred timing and reach out via WhatsApp or email within 24 hours to confirm your appointment.
-            </p>
-            <button 
-              onClick={() => navigate('/')}
-              className="btn-premium btn-premium-solid px-8 py-3 text-xs tracking-widest uppercase font-bold"
-            >
-              Back to Home
-            </button>
-          </motion.div>
-        </main>
-        <Footer />
-      </div>
-    )
+    const waLink = getWaLink()
+    window.open(waLink, '_blank')
+    setTimeout(() => setFormStatus('idle'), 1000)
   }
 
   return (
@@ -71,7 +73,7 @@ export default function BookingPage() {
       <Navbar />
       
       <main className="max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 lg:items-center">
           
           {/* Left Column: Info */}
           <div className="lg:col-span-5">
@@ -148,155 +150,68 @@ export default function BookingPage() {
               {/* Subtle background glow */}
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
               
-              <form onSubmit={handleSubmit} className="relative z-10 space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* Name */}
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Name *</label>
-                    <input 
-                      required
-                      type="text" 
-                      placeholder="Name"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm"
-                    />
-                  </div>
-                  {/* Email */}
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Email *</label>
-                    <input 
-                      required
-                      type="email" 
-                      placeholder="e.g., example@mail.com"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {/* Country Code */}
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Code</label>
-                    <div className="relative">
-                      <select className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8">
-                        <option>MY +60</option>
-                        <option>SG +65</option>
-                        <option>ID +62</option>
-                      </select>
-                      <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted" size={14} />
-                    </div>
-                  </div>
-                  {/* Phone */}
-                  <div className="md:col-span-2 space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Phone *</label>
-                    <input 
-                      required
-                      type="tel" 
-                      placeholder="Phone"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* Services */}
+              <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
                 <div className="space-y-2">
-                  <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Services *</label>
+                  <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Name *</label>
+                  <input 
+                    required
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name"
+                    className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Service Selected *</label>
                   <div className="relative">
                     <select 
                       required
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
                       className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8"
                     >
-                      <option value="" disabled selected>Choose a service</option>
+                      <option value="" disabled>Choose a service</option>
                       {services.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
-                    <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted" size={14} />
+                    <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={14} />
                   </div>
                 </div>
 
-                {/* Preferred Date & Time */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Preferred Date *</label>
-                    <input 
+                <div className="space-y-2">
+                  <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Preferred Branch *</label>
+                  <div className="relative">
+                    <select 
                       required
-                      type="date"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm appearance-none"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Time</label>
-                    <div className="relative">
-                      <select className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8">
-                        <option>Morning (10:00 – 13:00)</option>
-                        <option>Afternoon (13:00 – 17:00)</option>
-                        <option>Evening (17:00 – 19:00)</option>
-                      </select>
-                      <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted" size={14} />
-                    </div>
+                      name="branch"
+                      value={formData.branch}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8"
+                    >
+                      <option value="" disabled>Select branch</option>
+                      {Object.keys(WA_NUMBERS).map((b) => (
+                        <option key={b} value={b}>{BRANCH_LABELS[b as Branch]}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={14} />
                   </div>
                 </div>
 
-                {/* Alt Date 1 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Alternative Date 1</label>
-                    <input 
-                      type="date"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm appearance-none"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Time</label>
-                    <div className="relative">
-                      <select className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8">
-                        <option>Morning (10:00 – 13:00)</option>
-                        <option>Afternoon (13:00 – 17:00)</option>
-                        <option>Evening (17:00 – 19:00)</option>
-                      </select>
-                      <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted" size={14} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Alt Date 2 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Alternative Date 2</label>
-                    <input 
-                      type="date"
-                      className="w-full bg-transparent border-b border-divider py-3 focus:outline-none focus:border-gold transition-colors font-body text-sm appearance-none"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block font-body text-[10px] tracking-widest uppercase text-muted font-bold">Time</label>
-                    <div className="relative">
-                      <select className="w-full bg-transparent border-b border-divider py-3 appearance-none focus:outline-none focus:border-gold transition-colors font-body text-sm pr-8">
-                        <option>Morning (10:00 – 13:00)</option>
-                        <option>Afternoon (13:00 – 17:00)</option>
-                        <option>Evening (17:00 – 19:00)</option>
-                      </select>
-                      <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-muted" size={14} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4">
-                  <p className="font-body text-[10px] text-muted leading-relaxed uppercase tracking-wider mb-8">
-                    Terms & Conditions <br />
-                    <span className="opacity-60 normal-case tracking-normal">By submitting this form, you acknowledge and agree to our booking policies. Our team will contact you to confirm the final slot based on availability.</span>
-                  </p>
-                  
+                <div className="pt-8">
                   <button 
                     disabled={formStatus === 'submitting'}
                     type="submit"
-                    className="w-full btn-premium btn-premium-solid py-5 text-xs tracking-[0.2em] font-bold uppercase flex items-center justify-center gap-3 disabled:opacity-70 group"
+                    className="w-full btn-premium btn-premium-solid py-5 text-[11px] sm:text-xs tracking-[0.2em] font-bold uppercase flex items-center justify-center gap-3 disabled:opacity-70 group"
                   >
-                    {formStatus === 'submitting' ? 'Processing...' : (
-                      <>
-                        Book Now
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </>
-                    )}
+                    {formStatus === 'submitting' ? 'Processing...' : 'Book Your Free Consultation'}
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
+                  <p className="text-center font-body text-[10px] text-muted/70 mt-6 pt-2">
+                    We'll reply on WhatsApp within 24 hours. No spam, ever.
+                  </p>
                 </div>
               </form>
             </motion.div>
