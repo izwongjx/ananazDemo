@@ -219,7 +219,7 @@ export default function TreatmentsPage() {
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-4 flex items-center gap-3"
+              className="font-body text-xs tracking-[0.3em] uppercase text-gold mb-4 flex items-center gap-3 font-bold"
             >
               <span className="w-8 h-px bg-gold" />
               THE JOURNEY

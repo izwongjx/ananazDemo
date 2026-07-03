@@ -23,8 +23,8 @@ export default function InstagramFeed() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
           >
-            <p className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-2">
-              <span className="inline-block w-8 h-px bg-gold" />
+            <p className="font-body text-xs sm:text-[13px] tracking-[0.2em] uppercase text-[#c9866b] flex items-center gap-3 font-bold mb-2">
+              <span className="inline-block w-8 h-[1px] bg-[#c9866b]" />
               Instagram
             </p>
             <h2 className="font-display text-3xl lg:text-4xl font-semibold text-dark">@ananaz.official</h2>

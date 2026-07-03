@@ -14,10 +14,24 @@ html {
 body {
   background-color: #E9E2DF;
   color: #2C2621;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Jost', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+:root {
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Jost', sans-serif;
+}
+
+h1, h2, h3, h4 { 
+  font-family: var(--serif); 
+  font-weight: 400; 
+}
+
+.serif { 
+  font-family: var(--serif); 
 }
 
 /* ── Custom Scrollbar ────────────────────────────────────── */
@@ -74,7 +88,7 @@ body {
 .img-placeholder::after {
   content: 'image';
   position: absolute;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Jost', sans-serif;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;

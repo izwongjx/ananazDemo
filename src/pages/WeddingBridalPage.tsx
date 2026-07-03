@@ -9,10 +9,9 @@ import { weddingBridalPackages } from '../data/weddingBridal'
 export default function WeddingBridalPage() {
   return (
     <div className="bg-cream min-h-screen">
-      <Navbar />
-
+      
       {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className="bg-dark relative overflow-hidden pt-36 pb-24">
+      <section className="relative overflow-hidden pt-36 pb-24" style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}>
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }}
@@ -23,7 +22,7 @@ export default function WeddingBridalPage() {
             Back to Home
           </Link>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-5">
+            className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-5 font-bold">
             <span className="w-8 h-px bg-gold inline-block" /> Bridal Radiance · 03
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
@@ -32,7 +31,7 @@ export default function WeddingBridalPage() {
             Wedding &<br /><span className="text-gold italic">Bridal.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="font-body text-off-white/55 text-base leading-relaxed max-w-lg">
+            className="font-body text-white text-base leading-relaxed max-w-lg">
             Your wedding day is the one occasion where every detail matters — especially how you feel.
             Crafted to ensure you radiate confidence and total grace.
           </motion.p>
@@ -45,14 +44,14 @@ export default function WeddingBridalPage() {
       </section>
 
       {/* ── CTA BAND ─────────────────────────────────────────────────── */}
-      <section className="bg-dark py-24 text-center">
+      <section className="py-24 text-center" style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}>
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="max-w-2xl mx-auto px-6">
           <Heart className="text-gold mx-auto mb-6" size={24} />
           <h2 className="font-display text-3xl lg:text-4xl font-semibold text-off-white mb-4">
             Your wedding is once. Your glow should be unforgettable.
           </h2>
-          <p className="font-body text-off-white/50 text-sm mb-10 leading-relaxed">
+          <p className="font-body text-white text-sm mb-10 leading-relaxed">
             Book a bridal consultation and we'll build your perfect package around your timeline and goals.
           </p>
           <Link to="/booking"
@@ -62,7 +61,6 @@ export default function WeddingBridalPage() {
         </motion.div>
       </section>
 
-      <Footer />
-    </div>
+          </div>
   )
 }

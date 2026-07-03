@@ -182,6 +182,38 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── STATS / MILESTONES ─────────────────────────────────────── */}
+      <section className="py-16 bg-[#e9e2df] border-y border-divider/40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <FadeUp delay={0.05}>
+              <div className="bg-[#FAF8F5] border border-divider/40 rounded-[1.5rem] p-8 lg:p-10 text-center h-full flex flex-col justify-center items-center shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <span className="font-display text-5xl lg:text-6xl font-light text-[#C18C74] mb-3">25+</span>
+                <span className="font-body text-xs lg:text-sm tracking-wide text-dark/70">Years in practice</span>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <div className="bg-[#FAF8F5] border border-divider/40 rounded-[1.5rem] p-8 lg:p-10 text-center h-full flex flex-col justify-center items-center shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <span className="font-display text-5xl lg:text-6xl font-light text-[#C18C74] mb-3">10K+</span>
+                <span className="font-body text-xs lg:text-sm tracking-wide text-dark/70">Clients served</span>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.15}>
+              <div className="bg-[#FAF8F5] border border-divider/40 rounded-[1.5rem] p-8 lg:p-10 text-center h-full flex flex-col justify-center items-center shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <span className="font-display text-5xl lg:text-6xl font-light text-[#C18C74] mb-3">3</span>
+                <span className="font-body text-xs lg:text-sm tracking-wide text-dark/70">Locations in Selangor</span>
+              </div>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <div className="bg-[#FAF8F5] border border-divider/40 rounded-[1.5rem] p-8 lg:p-10 text-center h-full flex flex-col justify-center items-center shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <span className="font-display text-5xl lg:text-6xl font-light text-[#C18C74] mb-3">6+</span>
+                <span className="font-body text-xs lg:text-sm tracking-wide text-dark/70">Skin growth types treated</span>
+              </div>
+            </FadeUp>
+          </div>
+        </div>
+      </section>
+
       {/* ── TIMELINE ──────────────────────────────────────────────── */}
       <section className="py-28 lg:py-36 bg-dark relative overflow-hidden">
         <div

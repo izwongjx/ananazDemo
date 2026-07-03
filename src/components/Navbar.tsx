@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext'
 import CartDrawer from './CartDrawer'
 
 const serviceItems = [
-  { label: 'Skin Treatments', href: '/skin-treatments', icon: Microscope, desc: 'Skin tags, melasma, milia' },
+  { label: 'Skin Treatments', href: '/skin-treatments', icon: Microscope, desc: 'Skin tags, keratosis, milia' },
   { label: 'Body Spa', href: '/body-spa', icon: Waves, desc: 'Aromatherapy & traditional' },
   { label: 'Wedding & Bridal', href: '/wedding-bridal', icon: Heart, desc: 'Bridal packages' },
 ]

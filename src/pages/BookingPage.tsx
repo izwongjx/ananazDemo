@@ -8,7 +8,7 @@ import { WA_NUMBERS, Branch, BRANCH_LABELS } from '../lib/whatsapp'
 
 const services = [
   'Skin Tag Removal',
-  'Melasma Treatment',
+  'Sebhorreic Keratosis',
   'Oil Cysts / Milia Treatment',
   'Aroma Therapy',
   'Traditional Therapy',
@@ -70,8 +70,7 @@ export default function BookingPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Navbar />
-      
+            
       <main className="max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 lg:items-center">
           
@@ -101,7 +100,7 @@ export default function BookingPage() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-semibold text-dark mb-1">Timing</h3>
-                    <p className="font-body text-sm text-muted">Tuesday – Saturday: 10:00 – 19:00</p>
+                    <p className="font-body text-sm text-muted">Tuesday – Saturday: 09:00 – 18:00</p>
                   </div>
                 </div>
 
@@ -132,7 +131,7 @@ export default function BookingPage() {
               <div className="mt-20 p-8 bg-white/50 border border-gold/10 relative overflow-hidden group">
                 <div className="absolute top-0 left-0 w-1 h-full bg-gold/20 group-hover:bg-gold transition-colors duration-500" />
                 <p className="font-display text-2xl italic text-gold leading-snug mb-4">
-                  "Beauty is an inquiry, not a destination."
+                  "We don’t simply remove skin growths. We restore confidence through knowledge, precision, and genuinely caring for every skin we treat."
                 </p>
                 <p className="font-body text-[10px] tracking-[0.2em] uppercase text-muted">— Studio Philosophy</p>
               </div>
@@ -219,8 +218,6 @@ export default function BookingPage() {
           
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

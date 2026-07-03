@@ -16,21 +16,27 @@ const stagger = {
 const categories = [
   {
     title: 'Skin Restoration Programme',
-    icon: <Star size={16} fill="currentColor" />,
-    desc: "Pro Series Skin Tag Removal, Melasma Treatment, Oil Cysts / Milia Extraction",
+    icon: <Star size={20} fill="currentColor" />,
+    desc: "Structured treatments to restore and renew. Precision removal for skin tags, milia, and sebhorreic keratosis.",
     learnMoreHref: '/skin-treatments',
   },
   {
-    title: 'Body Spa',
-    icon: <Leaf size={16} fill="currentColor" />,
-    desc: "4-in-1 Aromatherapy Massage, 4-in-1 Traditional Urut",
-    learnMoreHref: '/body-spa',
+    title: 'Confidence Glow Series',
+    icon: <Heart size={20} fill="currentColor" />,
+    desc: "Designed for the woman who wants to look and feel radiant. A comprehensive approach to overall face glow.",
+    learnMoreHref: '/wedding-bridal',
   },
   {
-    title: 'Wedding & Bridal',
-    icon: <Heart size={16} fill="currentColor" />,
-    desc: "Mini Puteri Package, Mini Ratu Package, Full Bridal Programme",
-    learnMoreHref: '/wedding-bridal',
+    title: 'Skin Rejuvenation and Repair',
+    icon: <User size={20} fill="currentColor" />,
+    desc: "Nourish, repair, and reverse the effects of stress and environment. Clinical care for deep cell recovery.",
+    learnMoreHref: '/skin-treatments',
+  },
+  {
+    title: 'Body Wellness',
+    icon: <Leaf size={20} fill="currentColor" />,
+    desc: "Unwind and detoxify. Traditional Malay therapies, scrubs, lulur, saunas, and calming baths for complete restoration.",
+    learnMoreHref: '/body-spa',
   },
 ]
 
@@ -51,7 +57,7 @@ export default function About() {
           variants={stagger}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="py-20 lg:py-32 lg:pr-20 space-y-8 relative"
+          className="py-20 lg:py-32 lg:pr-20 relative"
         >
           {/* Giant decorative quote mark */}
           <div className="absolute -top-4 -left-4 lg:-top-8 lg:left-0 text-[12rem] lg:text-[16rem] leading-none font-serif text-[#C18C74]/10 select-none pointer-events-none z-0">
@@ -61,9 +67,9 @@ export default function About() {
           <div className="relative z-10 space-y-8">
           <motion.p
             variants={fadeUp}
-            className="font-body text-[10px] tracking-[0.25em] uppercase text-gold flex items-center gap-3 font-semibold"
+            className="font-body text-xs sm:text-[13px] tracking-[0.2em] uppercase text-[#c9866b] flex items-center gap-3 font-bold"
           >
-            <span className="inline-block w-8 h-px bg-gold" />
+            <span className="inline-block w-8 sm:w-12 h-[1px] bg-[#c9866b]" />
             The Founder Story
           </motion.p>
           
@@ -96,38 +102,45 @@ export default function About() {
           variants={stagger}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="py-20 lg:py-32 lg:pl-16 space-y-6"
+          className="py-20 lg:py-32 lg:pl-16 space-y-8"
         >
           <motion.p
             variants={fadeUp}
-            className="font-body text-[10px] tracking-[0.25em] uppercase text-muted font-semibold mb-8"
+            className="font-body text-xs sm:text-[13px] tracking-[0.2em] uppercase text-[#c9866b] font-bold"
           >
             Signature Treatments
           </motion.p>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {categories.map((cat, idx) => (
-              <motion.div 
-                variants={fadeUp}
+              <Link 
+                to={cat.learnMoreHref}
                 key={idx}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-black/[0.04] flex gap-5 items-start hover:shadow-md transition-shadow group"
+                className="block select-none"
               >
-                <div className="w-10 h-10 rounded-full bg-[#398880] text-white flex items-center justify-center shrink-0">
-                  {cat.icon}
-                </div>
-                <div>
-                  <h3 className="font-display font-semibold text-dark text-lg mb-1.5">{cat.title}</h3>
-                  <p className="font-body text-xs text-muted mb-4 leading-relaxed">
-                    {cat.desc}
-                  </p>
-                  <Link 
-                    to={cat.learnMoreHref} 
-                    className="text-[#398880] font-body text-[10px] tracking-widest uppercase font-semibold inline-flex items-center gap-1.5 hover:text-[#2a6660] transition-colors mt-1"
+                <motion.div 
+                  variants={fadeUp}
+                  className="bg-white rounded-xl p-4 lg:p-5 shadow-sm border border-black/[0.04] flex gap-4 items-start hover:shadow-md transition-shadow group cursor-pointer"
+                >
+                  <div 
+                    className="w-11 h-11 rounded-full text-white flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: 'linear-gradient(to bottom right, #329194, #369598, #3b9b9e, #40a0a3, #44a5a8)' }}
                   >
-                    Learn more <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </motion.div>
+                    {cat.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-body font-semibold text-[#3d2b1f] text-[15px] leading-tight mb-1">{cat.title}</h3>
+                    <p className="font-body text-[13px] text-[#9e7d6f] font-normal mb-2 leading-[1.6]">
+                      {cat.desc}
+                    </p>
+                    <span 
+                      className="text-[#398880] font-body text-[13px] font-medium inline-flex items-center gap-1 group-hover:text-[#2a6660] transition-colors"
+                    >
+                      Learn more &rarr;
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </motion.div>

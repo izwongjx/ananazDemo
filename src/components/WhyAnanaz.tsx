@@ -1,42 +1,42 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Star, Infinity, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Target, MessageSquare, RefreshCw, Globe, Handshake } from 'lucide-react'
 
 const reasons = [
   {
     id: 1,
-    highlight: '25+',
-    title: 'Years of Expertise',
-    body: 'Founded in 2000. The deepest skin expertise in this market.',
-    icon: null,
+    highlight: '01',
+    title: 'We Specialise, Not Generalise',
+    body: 'Skin tag and benign growth removal is not a side service for us. It is our core expertise. Depth of focus produces consistently better outcomes than trying to do everything for everyone.',
+    icon: Target,
   },
   {
     id: 2,
-    highlight: '4.9',
-    title: 'Star Rating',
-    body: 'Verified by thousands of real clients across Malaysia.',
-    icon: Star,
+    highlight: '02',
+    title: 'We Communicate Honestly',
+    body: 'If a result cannot be guaranteed, we say so. If your expectation needs adjusting, we address it kindly but directly. Clients trust us because they know we tell them the truth.',
+    icon: MessageSquare,
   },
   {
     id: 3,
-    highlight: '01',
-    title: 'Founder-Led Care',
-    body: 'Sam built this from her own skin struggle. She knows your pain personally.',
-    icon: null,
+    highlight: '03',
+    title: 'Clients Return for Years',
+    body: 'Our most loyal clients have been with us for 10, 15, even 20 years. That kind of long-term trust is the measure we care about most — not social media metrics or monthly promotions.',
+    icon: RefreshCw,
   },
   {
     id: 4,
-    highlight: null,
-    title: 'No Hard Selling',
-    body: 'We tell you what your skin needs - not what earns us the most.',
-    icon: Infinity,
+    highlight: '04',
+    title: 'We Know Malaysian Skin',
+    body: 'Experience in Malaysia means understanding how Malay, Chinese, Indian, and mixed-heritage skin responds — to treatment, to aftercare, and to our climate. This is knowledge that textbooks cannot replace.',
+    icon: Globe,
   },
   {
     id: 5,
-    highlight: null,
-    title: 'Post-Visit Follow-Up',
-    body: "We check in on WhatsApp after every treatment. Because your skin doesn't stop.",
-    icon: MessageCircle,
+    highlight: '05',
+    title: 'Personal, Consistent Care',
+    body: 'You will not be handed between staff members each time you visit. You build a relationship with someone who knows your skin\'s history — and who adjusts your care as your skin changes over time.',
+    icon: Handshake,
   },
 ]
 
@@ -64,9 +64,9 @@ export default function WhyAnanaz() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             className="flex items-center justify-center gap-4 mb-6"
           >
-            <span className="w-12 h-px bg-gold/50" />
-            <h2 className="font-body text-[10px] tracking-[0.3em] uppercase text-gold font-bold">Why Ananaz</h2>
-            <span className="w-12 h-px bg-gold/50" />
+            <span className="w-12 h-px bg-[#c9866b]" />
+            <h2 className="font-body text-xs sm:text-[13px] tracking-[0.2em] uppercase text-[#c9866b] font-bold">Why Ananaz</h2>
+            <span className="w-12 h-px bg-[#c9866b]" />
           </motion.div>
           
           <motion.h3 
@@ -75,7 +75,7 @@ export default function WhyAnanaz() {
             transition={{ delay: 0.1 }}
             className="font-display text-3xl lg:text-5xl font-semibold text-white"
           >
-            5 reasons women choose <span className="italic text-gold font-light">Ananaz</span>
+            5 reasons women choose <span className="italic text-gold font-bold">Ananaz</span>
           </motion.h3>
         </div>
 
@@ -87,20 +87,20 @@ export default function WhyAnanaz() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="w-[75vw] sm:w-[280px] md:w-auto flex-shrink-0 snap-center bg-white/5 border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center hover:bg-white/10 hover:border-gold/30 hover:-translate-y-2 transition-all duration-500 group"
+              className="w-[75vw] sm:w-[280px] md:w-auto flex-shrink-0 snap-center bg-white/5 border border-white/5 rounded-2xl p-8 lg:p-10 flex flex-col items-start text-left hover:bg-white/10 hover:border-gold/30 hover:-translate-y-2 transition-all duration-500 group relative"
             >
-              {/* Highlight / Icon Area */}
-              <div className="h-20 flex items-center justify-center mb-6 text-gold">
-                {r.highlight && r.icon === Star ? (
-                  <div className="flex items-start gap-1">
-                    <span className="font-display text-5xl font-medium tracking-tight leading-none">{r.highlight}</span>
-                    <r.icon size={24} className="fill-gold mt-1" />
-                  </div>
-                ) : r.highlight ? (
-                  <span className="font-display text-5xl font-medium tracking-tight leading-none">{r.highlight}</span>
-                ) : r.icon ? (
-                  <r.icon size={56} strokeWidth={1.5} className="group-hover:scale-110 transition-transform duration-500" />
-                ) : null}
+              {/* Top row: Icon on left, Highlight number on right */}
+              <div className="w-full flex items-center justify-between mb-8 text-gold">
+                {r.icon ? (
+                  <r.icon size={32} strokeWidth={1.5} className="group-hover:scale-110 transition-transform duration-500" />
+                ) : (
+                  <div className="h-8 w-8" />
+                )}
+                {r.highlight && (
+                  <span className="font-display text-4xl font-light tracking-tight leading-none text-white/20 group-hover:text-gold/20 transition-colors duration-500">
+                    {r.highlight}
+                  </span>
+                )}
               </div>
 
               {/* Title & Body */}
@@ -108,7 +108,7 @@ export default function WhyAnanaz() {
                 {r.title}
               </h4>
               
-              <p className="font-body text-[13px] text-white leading-relaxed">
+              <p className="font-body text-[13px] text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                 {r.body}
               </p>
             </motion.div>

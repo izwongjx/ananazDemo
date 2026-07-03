@@ -48,8 +48,7 @@ export default function BranchesPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Navbar />
-      
+            
       {/* ── HERO SECTION ──────────────────────────────────────────────── */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 px-6 lg:px-10 bg-dark text-white relative overflow-hidden">
         <div
@@ -239,7 +238,6 @@ export default function BranchesPage() {
         </AnimatePresence>
       </section>
       
-      <Footer />
-    </div>
+          </div>
   )
 }

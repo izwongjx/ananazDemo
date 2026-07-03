@@ -37,6 +37,7 @@ function HomePage() {
       <Reviews />
       <InstagramFeed />
       <FAQ />
+      <Footer />
     </div>
   )
 }
@@ -68,7 +69,6 @@ export default function App() {
           <Route path="/services/body-spa" element={<BodySpaPage />} />
           <Route path="/services/wedding-bridal" element={<WeddingBridalPage />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </CartProvider>
   )

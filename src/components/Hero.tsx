@@ -21,7 +21,7 @@ export default function Hero() {
       className="relative min-h-screen w-full flex flex-col lg:flex-row overflow-hidden"
     >
       {/* ── LEFT SIDE ─────────────────────────────────────────────── */}
-      <div className="w-full lg:w-1/2 bg-cream flex flex-col justify-center px-6 lg:px-20 pt-32 lg:pt-40 pb-16 lg:pb-24 relative z-10">
+      <div className="w-full lg:w-1/2 bg-[#faf6f2] flex flex-col justify-center px-6 lg:px-20 pt-32 lg:pt-40 pb-16 lg:pb-24 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,41 +30,40 @@ export default function Hero() {
         >
           {/* Top Label */}
           <div className="flex items-center gap-4 mb-8">
-            <span className="w-20 h-px bg-gold" />
-            <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-gold font-bold">
-              25 Years of Skin Expertise - Kuala Lumpur
+            <span className="w-8 sm:w-12 h-[1px] bg-[#c9866b]" />
+            <span className="font-body text-xs sm:text-[13px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#c9866b] font-bold">
+              25 Years of Skin Expertise · Kuala Lumpur
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-display text-5xl lg:text-7xl font-light text-dark leading-[1.1] mb-2">
+          <h1 className="font-display text-6xl lg:text-[5rem] xl:text-[5.5rem] font-light text-app-text leading-[1.1] mb-6">
             Lived it.<br />
-            <span className="text-gold italic">Mastered it.</span>
+            <span className="text-[#c5876a] italic">Mastered it.</span>
           </h1>
 
           {/* Subheading */}
-          <p className="font-display text-xl lg:text-2xl italic text-muted mb-8">
+          <p className="font-display text-xl lg:text-[22px] italic text-[#9E7D6F] mb-10">
             Dah rasa. Dah kuasai.
           </p>
 
           {/* Description */}
-          <p className="font-body text-sm lg:text-base text-muted leading-relaxed mb-10 max-w-md">
-            Sam knows exactly what it feels like to try everything and still wake up disappointed. 
-            <strong className="font-semibold text-dark"> She found the answers the hard way</strong> — 
-            and has spent <strong className="font-semibold text-dark">25 years making sure you don't have to.</strong>
+          <p className="font-body text-base lg:text-[17px] text-[#6b4c3b] leading-[1.8] mb-12 max-w-xl pr-4">
+            Sam knows exactly what it feels like to try everything and still wake up 
+            disappointed. <strong className="font-semibold text-[#6b4c3b]">She found the answers the hard way</strong> — and has spent <strong className="font-semibold text-[#6b4c3b]">25 years making sure you don't have to.</strong>
           </p>
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
             <Link 
               to="/booking"
-              className="w-full sm:w-auto px-8 py-3.5 bg-gold text-white font-body text-xs tracking-widest uppercase font-bold hover:bg-peach transition-colors text-center rounded-full shadow-sm"
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#c9856a] text-white font-body text-[15px] font-semibold hover:opacity-90 transition-opacity text-center rounded-full shadow-sm"
             >
               Book Your Consultation
             </Link>
             <Link 
               to="/about"
-              className="w-full sm:w-auto px-8 py-3.5 border border-teal text-teal font-body text-xs tracking-widest uppercase font-bold hover:bg-dark hover:border-dark hover:text-white transition-colors text-center rounded-full"
+              className="w-full sm:w-auto px-8 py-3.5 border border-[#2d8b8e] text-[#2d8b8e] font-body text-[15px] font-semibold hover:bg-[#2d8b8e] hover:text-white transition-colors text-center rounded-full"
             >
               Our Story &rarr;
             </Link>
@@ -85,7 +84,8 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="absolute inset-0 bg-gradient-to-br from-[#398880] via-[#35615d] to-[#43443e] z-0"
+              className="absolute inset-0 z-0"
+              style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}
             >
               <div className="absolute top-0 right-0 w-[500px] h-[500px] border border-white/10 rounded-full translate-x-1/4 -translate-y-1/4 pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-[400px] h-[400px] border border-white/10 rounded-full -translate-x-1/4 translate-y-1/4 pointer-events-none" />

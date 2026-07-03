@@ -34,8 +34,7 @@ export default function WeddingBridalDetailPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Navbar />
-
+      
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="bg-dark relative overflow-hidden pt-36 pb-28">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -225,7 +224,6 @@ export default function WeddingBridalDetailPage() {
         </Link>
       </section>
 
-      <Footer />
-    </div>
+          </div>
   )
 }

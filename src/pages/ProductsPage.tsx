@@ -122,7 +122,7 @@ export default function ProductsPage() {
       {/* ── HERO ─────────────────────────────────────────────────────── */}
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className="bg-dark relative overflow-hidden pt-36 pb-24">
+      <section className="relative overflow-hidden pt-36 pb-24" style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}>
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#E8C98A 1px, transparent 1px)', backgroundSize: '32px 32px' }}
@@ -132,7 +132,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-5"
+            className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-5 font-bold"
           >
             <span className="w-8 h-px bg-gold inline-block" />
             Sinarosa by Ananaz
@@ -150,7 +150,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="font-body text-off-white/55 text-base leading-relaxed max-w-lg"
+            className="font-body text-white text-base leading-relaxed max-w-lg"
           >
             Each Sinarosa product is formulated with clinically chosen ingredients — verified, transparent, and results-focused. No fillers. No guesswork.
           </motion.p>
@@ -300,7 +300,7 @@ export default function ProductsPage() {
       </section>
 
       {/* ── BOTTOM NOTE ───────────────────────────────────────────────── */}
-      <section className="py-20 bg-dark text-center">
+      <section className="py-20 text-center" style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

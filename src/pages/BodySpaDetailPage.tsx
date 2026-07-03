@@ -35,8 +35,7 @@ export default function BodySpaDetailPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-      <Navbar />
-
+      
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="bg-dark relative overflow-hidden pt-36 pb-28">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -195,7 +194,10 @@ export default function BodySpaDetailPage() {
           <div>
             <FadeUp className="mb-20">
               <p className="font-body text-[11px] tracking-[0.3em] uppercase text-gold font-bold mb-4">The Ritual</p>
-              <h2 className="font-display text-4xl font-semibold text-dark leading-tight">Step-by-Step Experience</h2>
+              <h2 className="font-display text-4xl font-semibold text-dark leading-tight">
+                Your journey,<br />
+                <span className="text-gold font-bold">step by step.</span>
+              </h2>
             </FadeUp>
 
             <div className="space-y-0 relative">
@@ -295,7 +297,6 @@ export default function BodySpaDetailPage() {
         </section>
       )}
 
-      <Footer />
-    </div>
+          </div>
   )
 }
