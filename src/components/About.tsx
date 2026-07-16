@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, User, Star, Heart, Leaf } from 'lucide-react'
+import { ArrowRight, User, Star, Heart, Leaf, Sparkles, Sun, Flower2 } from 'lucide-react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -15,28 +15,46 @@ const stagger = {
 
 const categories = [
   {
-    title: 'Skin Restoration Programme',
+    title: 'Derma Restructuring Therapy',
+    icon: <Sun size={20} fill="currentColor" />,
+    desc: "Advanced skin restructuring for deep rejuvenation and a healthier skin barrier.",
+    learnMoreHref: '/derma-restructuring',
+  },
+  {
+    title: 'Signature Precision Skin Renewal',
     icon: <Star size={20} fill="currentColor" />,
-    desc: "Structured treatments to restore and renew. Precision removal for skin tags, milia, and sebhorreic keratosis.",
+    desc: "This program is not just about removal; it supports skin renewal and recovery after treatment.",
     learnMoreHref: '/skin-treatments',
   },
   {
-    title: 'Confidence Glow Series',
+    title: 'Glass Skin Therapy',
     icon: <Heart size={20} fill="currentColor" />,
-    desc: "Designed for the woman who wants to look and feel radiant. A comprehensive approach to overall face glow.",
-    learnMoreHref: '/wedding-bridal',
+    desc: "This is the choice for skin that wants to look smoother, brighter, and luminous.",
+    learnMoreHref: '/glass-skin',
   },
   {
-    title: 'Skin Rejuvenation and Repair',
+    title: 'Skin Rebirth Therapy',
     icon: <User size={20} fill="currentColor" />,
-    desc: "Nourish, repair, and reverse the effects of stress and environment. Clinical care for deep cell recovery.",
-    learnMoreHref: '/skin-treatments',
+    desc: "This therapy supports repair, regeneration, and a healthier skin appearance.",
+    learnMoreHref: '/skin-rebirth',
+  },
+  {
+    title: 'Skin Bright Therapy',
+    icon: <Sparkles size={20} fill="currentColor" />,
+    desc: "This therapy controls pigmentation and reveals a brighter, more even skin tone.",
+    learnMoreHref: '/skin-bright',
+  },
+  {
+    title: 'Acne Recovery Therapy',
+    icon: <Leaf size={20} fill="currentColor" />,
+    desc: "This treatment helps soothe, clear, and heal acne-prone skin.",
+    learnMoreHref: '/acne',
   },
   {
     title: 'Body Wellness',
-    icon: <Leaf size={20} fill="currentColor" />,
-    desc: "Unwind and detoxify. Traditional Malay therapies, scrubs, lulur, saunas, and calming baths for complete restoration.",
-    learnMoreHref: '/body-spa',
+    icon: <Flower2 size={20} fill="currentColor" />,
+    desc: "Restore your body, renew your mind through personalised therapeutic treatments.",
+    learnMoreHref: '/body-wellness',
   },
 ]
 

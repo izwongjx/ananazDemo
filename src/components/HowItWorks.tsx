@@ -4,33 +4,40 @@ import { MessageSquareHeart, ClipboardList, Sparkles, HeartHandshake } from 'luc
 
 const steps = [
   {
-    num: '1',
-    title: 'Initial Enquiry',
-    desc: "Reach out via WhatsApp. No formal consultation required. Simply share your concern and a photo if you're comfortable. We will respond with honesty and warmth.",
+    num: '💬',
+    title: 'Share Your Concern',
+    desc: "Tell us what’s worrying you. A WhatsApp message or photo is enough to get started.",
     tag: 'WHATSAPP',
   },
   {
-    num: '2',
-    title: 'Private Consultation',
-    desc: "Your visit begins with a calm, unhurried consultation. Kak Sam will assess each growth, explain exactly what she sees, and recommend only what is genuinely appropriate for you.",
+    num: '🔍',
+    title: 'Personal Skin Assessment',
+    desc: "We carefully examine your skin and identify exactly what you’re dealing with.",
     tag: 'IN-CLINIC',
   },
   {
-    num: '3',
-    title: 'Treatment Plan',
-    desc: "You will receive a clear, transparent plan — which growths to treat, in what order, and at what pace. You are never pressured. You always decide.",
+    num: '📋',
+    title: 'Your Personalised Plan',
+    desc: "Together, we discuss the most suitable treatment options. You decide what feels right for you.",
     tag: 'YOUR DECISION',
   },
   {
-    num: '4',
-    title: 'The Procedure',
-    desc: "Using the Sam Precision Signature™, each growth is removed individually and carefully. Comfort is managed. You are guided through every moment.",
-    tag: 'SAM PRECISION™',
+    num: '✨',
+    title: 'Sam Precision Signature',
+    desc: "Every skin growth is treated with precision, care and attention to healthy healing.",
+    tag: 'SAM PRECISION',
   },
   {
-    num: '5',
+    num: '🌿',
     title: 'Aftercare & Recovery',
-    desc: "You leave with detailed aftercare instructions and direct access to us for any questions. We follow up to ensure your skin is healing well and you feel supported.",
+    desc: (
+      <>
+        Your journey doesn’t end after treatment.
+        <br />
+        <br />
+        We’re here to support your recovery and answer your questions every step of the way.
+      </>
+    ),
     tag: 'FULL SUPPORT',
   },
 ]
@@ -59,9 +66,9 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1 }}
-            className="font-display text-4xl lg:text-5xl font-light text-dark mb-6"
+            className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-[2.75rem] lg:whitespace-nowrap tracking-tight font-light text-dark mb-6"
           >
-            Your skin journey starts with <span className="italic text-gold font-light">a conversation.</span>
+            Your journey to healthier skin begins with understanding - <span className="italic text-gold font-light">not assumptions.</span>
           </motion.h3>
 
           <motion.p 

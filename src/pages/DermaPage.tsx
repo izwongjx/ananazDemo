@@ -4,9 +4,9 @@ import { ArrowLeft, ArrowRight, Sparkles } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import TreatmentGrid from '../components/TreatmentGrid'
-import { skinTreatments } from '../data/skinTreatments'
+import { dermaTreatments } from '../data/derma'
 
-export default function SkinTreatmentsPage() {
+export default function DermaPage() {
   return (
     <div className="bg-cream min-h-screen pt-24">
 
@@ -21,16 +21,16 @@ export default function SkinTreatmentsPage() {
           <div>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center gap-3 mb-5 font-bold">
-              <span className="w-8 h-px bg-gold inline-block" /> Clinical Excellence · 02
+              <span className="w-8 h-px bg-gold inline-block" /> Clinical Excellence · 01
             </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-5xl lg:text-7xl font-semibold text-off-white leading-[1.08] max-w-3xl mb-6">
-              Signature<br /><span className="text-white italic">Skin Renewal Program.</span>
+              Derma Restructuring<br /><span className="text-white italic">Therapy.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
               className="font-body text-white text-base leading-relaxed max-w-lg">
-              Skin tags, milia, sebaceous hyperplasia, and other benign growths are more common than you think — and more treatable than you may have been told. At Ananaz, every skin concern requires different techniques, with your treatment experience designed around one principle: <strong className="font-semibold text-gold">precision</strong>.
+              Advanced skin restructuring for deep rejuvenation and a healthier skin barrier.
             </motion.p>
           </div>
 
@@ -56,7 +56,7 @@ export default function SkinTreatmentsPage() {
 
       {/* ── TREATMENT LISTING ─────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
-        <TreatmentGrid currentCategory="skin-treatments" items={skinTreatments} />
+        <TreatmentGrid currentCategory="derma-restructuring" items={dermaTreatments} />
       </section>
 
 

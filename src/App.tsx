@@ -20,10 +20,18 @@ import TreatmentsPage from './pages/TreatmentsPage'
 import BookingPage from './pages/BookingPage'
 import SkinTreatmentsPage from './pages/SkinTreatmentsPage'
 import TreatmentDetailPage from './pages/TreatmentDetailPage'
-import BodySpaPage from './pages/BodySpaPage'
-import BodySpaDetailPage from './pages/BodySpaDetailPage'
-import WeddingBridalPage from './pages/WeddingBridalPage'
-import WeddingBridalDetailPage from './pages/WeddingBridalDetailPage'
+import GlassSkinPage from './pages/GlassSkinPage'
+import GlassSkinDetailPage from './pages/GlassSkinDetailPage'
+import DermaPage from './pages/DermaPage'
+import DermaDetailPage from './pages/DermaDetailPage'
+import SkinRebirthPage from './pages/SkinRebirthPage'
+import SkinRebirthDetailPage from './pages/SkinRebirthDetailPage'
+import SkinBrightPage from './pages/SkinBrightPage'
+import SkinBrightDetailPage from './pages/SkinBrightDetailPage'
+import AcnePage from './pages/AcnePage'
+import AcneDetailPage from './pages/AcneDetailPage'
+import BodyWellnessPage from './pages/BodyWellnessPage'
+import BodyWellnessDetailPage from './pages/BodyWellnessDetailPage'
 import BranchesPage from './pages/BranchesPage'
 
 function HomePage() {
@@ -58,16 +66,27 @@ export default function App() {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/skin-treatments" element={<SkinTreatmentsPage />} />
           <Route path="/skin-treatments/:id" element={<TreatmentDetailPage />} />
-          <Route path="/body-spa" element={<BodySpaPage />} />
-          <Route path="/body-spa/:id" element={<BodySpaDetailPage />} />
-          <Route path="/wedding-bridal" element={<WeddingBridalPage />} />
-          <Route path="/wedding-bridal/:id" element={<WeddingBridalDetailPage />} />
+          <Route path="/glass-skin" element={<GlassSkinPage />} />
+          <Route path="/glass-skin/:id" element={<GlassSkinDetailPage />} />
+          <Route path="/derma-restructuring" element={<DermaPage />} />
+          <Route path="/derma-restructuring/:id" element={<DermaDetailPage />} />
+          <Route path="/skin-rebirth" element={<SkinRebirthPage />} />
+          <Route path="/skin-rebirth/:id" element={<SkinRebirthDetailPage />} />
+          <Route path="/skin-bright" element={<SkinBrightPage />} />
+          <Route path="/skin-bright/:id" element={<SkinBrightDetailPage />} />
+          <Route path="/acne" element={<AcnePage />} />
+          <Route path="/acne/:id" element={<AcneDetailPage />} />
+          <Route path="/body-wellness" element={<BodyWellnessPage />} />
+          <Route path="/body-wellness/:id" element={<BodyWellnessDetailPage />} />
           <Route path="/branches" element={<BranchesPage />} />
           
           {/* Keeping old service paths for compatibility if needed, or redirecting them */}
           <Route path="/services/skin-treatments" element={<SkinTreatmentsPage />} />
-          <Route path="/services/body-spa" element={<BodySpaPage />} />
-          <Route path="/services/wedding-bridal" element={<WeddingBridalPage />} />
+          <Route path="/services/glass-skin" element={<GlassSkinPage />} />
+          <Route path="/services/derma-restructuring" element={<DermaPage />} />
+          <Route path="/services/skin-rebirth" element={<SkinRebirthPage />} />
+          <Route path="/services/skin-bright" element={<SkinBrightPage />} />
+          <Route path="/services/acne" element={<AcnePage />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

@@ -242,12 +242,12 @@ export default function AboutPage() {
       <section className="py-28 lg:py-36 bg-cream border-t border-divider">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="text-center mb-20 flex flex-col items-center">
-            <SectionLabel>Our Portfolio</SectionLabel>
+            <SectionLabel>OUR RESULTS</SectionLabel>
             <h2 className="font-display text-4xl lg:text-5xl font-semibold text-dark max-w-2xl">
               Real Stories.<br /><span className="text-gold italic">Real Results.</span>
             </h2>
             <p className="mt-6 font-body text-muted text-base max-w-lg leading-relaxed">
-              Experience the visual proof of our 25-year commitment to clinical excellence and genuine skin restoration.
+              For more than 26 years, we’ve helped thousands of clients feel more confident in their own skin through personalised treatments and careful aftercare.
             </p>
           </FadeUp>
 

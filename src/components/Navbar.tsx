@@ -1,20 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Calendar, ChevronDown, Microscope, Waves, Heart, ShoppingBag } from 'lucide-react'
+import { Menu, X, Calendar, ChevronDown, Microscope, Heart, ShoppingBag, User, Leaf, Sparkles, Sun, Flower2 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import CartDrawer from './CartDrawer'
 
 const serviceItems = [
-  { label: 'Skin Treatments', href: '/skin-treatments', icon: Microscope, desc: 'Skin tags, keratosis, milia' },
-  { label: 'Body Spa', href: '/body-spa', icon: Waves, desc: 'Aromatherapy & traditional' },
-  { label: 'Wedding & Bridal', href: '/wedding-bridal', icon: Heart, desc: 'Bridal packages' },
+  { label: 'Derma Restructuring Therapy', href: '/derma-restructuring', icon: Sun, desc: 'Deep rejuvenation' },
+  { label: 'Signature Skin Renewal', href: '/skin-treatments', icon: Microscope, desc: 'Skin tags, keratosis, milia' },
+  { label: 'Glass Skin Therapy', href: '/glass-skin', icon: Heart, desc: 'Smoother, brighter skin' },
+  { label: 'Skin Rebirth Therapy', href: '/skin-rebirth', icon: User, desc: 'Repair & regeneration' },
+  { label: 'Skin Bright Therapy', href: '/skin-bright', icon: Sparkles, desc: 'Brightening & radiance' },
+  { label: 'Acne Recovery Therapy', href: '/acne', icon: Leaf, desc: 'Soothe & clear skin' },
+  { label: 'Wellness Collection', href: '/body-wellness', icon: Flower2, desc: 'Restore body & mind' },
 ]
 
 const links = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Services', href: null, dropdown: true },
+  { label: 'Collection', href: null, dropdown: true },
   { label: 'Products', href: '/products' },
   { label: 'Branches', href: '/branches' },
 ]

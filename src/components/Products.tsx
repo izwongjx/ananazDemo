@@ -5,11 +5,7 @@ import { ArrowRight, ShoppingBag } from 'lucide-react'
 import { waProduct } from '../lib/whatsapp'
 import { useCart } from '../context/CartContext'
 
-const products = [
-  { id: 'mawar', name: 'Mawar Lourve Serum', price: 'RM45', tag: 'For All Skin Types' },
-  { id: 'bakuchiol', name: 'Bakuchiol + Vit C Serum', price: 'RM59', tag: 'Vegan & Antioxidants' },
-  { id: 'royal', name: 'Royal Pudding Sleeping Mask', price: 'RM65', tag: 'For All Skin Types' },
-]
+import { productsData } from '../data/products'
 
 export default function Products() {
   const { addItem, setIsCartOpen } = useCart()
@@ -56,7 +52,7 @@ export default function Products() {
 
         {/* Product strip */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {products.map((p, i) => (
+          {productsData.map((p, i) => (
             <motion.div
               key={p.id}
               initial={{ opacity: 0, y: 28 }}

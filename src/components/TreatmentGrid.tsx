@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 
 type TreatmentItem = {
@@ -14,37 +14,70 @@ type TreatmentItem = {
 }
 
 type Props = {
-  currentCategory: 'skin-treatments' | 'body-spa' | 'wedding-bridal'
+  currentCategory: 'derma-restructuring' | 'skin-treatments' | 'glass-skin' | 'skin-rebirth' | 'skin-bright' | 'acne' | 'body-wellness'
   items: TreatmentItem[]
 }
 
 const tabs = [
-  { id: 'skin-treatments', label: 'Skin Treatments', path: '/skin-treatments' },
-  { id: 'body-spa', label: 'Body Spa', path: '/body-spa' },
-  { id: 'wedding-bridal', label: 'Wedding & Bridal', path: '/wedding-bridal' },
+  { id: 'derma', label: 'Derma Restructuring Therapy', path: '/derma-restructuring' },
+  { id: 'skin-treatments', label: 'Signature Skin Renewal', path: '/skin-treatments' },
+  { id: 'glass-skin', label: 'Glass Skin Therapy', path: '/glass-skin' },
+  { id: 'skin-rebirth', label: 'Skin Rebirth Therapy', path: '/skin-rebirth' },
+  { id: 'skin-bright', label: 'Skin Bright Therapy', path: '/skin-bright' },
+  { id: 'acne', label: 'Acne Recovery Therapy', path: '/acne' },
+  { id: 'body-wellness', label: 'Body Wellness', path: '/body-wellness' },
 ]
 
 export default function TreatmentGrid({ currentCategory, items }: Props) {
+  const navigate = useNavigate()
+
   return (
     <div className="w-full">
-      {/* Tabs */}
-      <div className="flex justify-between lg:justify-center items-center gap-1.5 sm:gap-3 mb-8 lg:mb-12 w-full">
-        {tabs.map((tab) => {
-          const isActive = tab.id === currentCategory
-          return (
-            <Link
-              key={tab.id}
-              to={tab.path}
-              className={`flex-1 lg:flex-none flex justify-center items-center px-1 py-2 sm:px-6 sm:py-2.5 rounded-full font-body text-[9px] sm:text-xs tracking-wider sm:tracking-widest uppercase font-bold transition-all duration-300 text-center leading-tight ${
-                isActive 
-                  ? 'bg-[#C18C74] text-white shadow-md' 
-                  : 'bg-white text-dark/60 hover:bg-white hover:text-dark border border-divider shadow-sm'
-              }`}
-            >
+      {/* Mobile Dropdown (visible only on small screens) */}
+      <div className="block lg:hidden mb-8 relative w-full">
+        <select 
+          value={currentCategory}
+          onChange={(e) => {
+            const path = tabs.find(t => t.id === e.target.value)?.path
+            if (path) navigate(path)
+          }}
+          className="w-full appearance-none bg-white border border-divider text-dark/80 font-body text-[10px] sm:text-xs tracking-widest uppercase font-bold py-3.5 pl-6 pr-12 rounded-full shadow-sm focus:outline-none focus:border-gold transition-colors"
+        >
+          {tabs.map((tab) => (
+            <option key={tab.id} value={tab.id}>
               {tab.label}
-            </Link>
-          )
-        })}
+            </option>
+          ))}
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5">
+          <svg className="h-4 w-4 text-dark/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Desktop Tabs (hidden on small screens) */}
+      <div className="hidden lg:block relative mb-12 w-[98vw] left-1/2 -translate-x-1/2">
+        <div 
+          className="flex items-center justify-center gap-3 xl:gap-4 overflow-hidden px-4 pb-0 w-full"
+        >
+          {tabs.map((tab) => {
+            const isActive = tab.id === currentCategory
+            return (
+              <Link
+                key={tab.id}
+                to={tab.path}
+                className={`whitespace-nowrap flex-shrink-0 flex justify-center items-center px-4 py-3 rounded-full font-body text-[11px] xl:text-xs tracking-widest uppercase font-bold transition-all duration-300 text-center leading-tight ${
+                  isActive 
+                    ? 'bg-gold text-white shadow-md' 
+                    : 'bg-white text-dark/70 hover:text-gold border border-divider hover:border-gold shadow-sm'
+                }`}
+              >
+                {tab.label}
+              </Link>
+            )
+          })}
+        </div>
       </div>
 
       {/* Grid */}

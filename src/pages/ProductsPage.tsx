@@ -2,114 +2,26 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  ArrowLeft, ArrowRight, X, Check, Droplets, FlaskConical, Sparkles, CheckCircle2, ShoppingBag, ExternalLink
+  ArrowLeft, ArrowRight, X, Check, Droplets, FlaskConical, Sparkles, CheckCircle2, ShoppingBag, ExternalLink, Leaf
 } from 'lucide-react'
 import { waProduct, waGeneral } from '../lib/whatsapp'
 import { useCart } from '../context/CartContext'
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const products = [
-  {
-    id: 'mawar',
-    name: 'Mawar Lourve Serum',
-    brand: 'Sinarosa',
-    category: 'For All Skin Type',
-    size: '10ml',
-    price: 'RM45',
-    icon: Droplets,
-    tagColor: 'bg-gold text-off-white',
-    shortDesc: 'A lightweight face serum with high concentrations of active ingredients targeting specific skin concerns — hydration, ageing, acne, or pigmentation.',
-    description: 'Face serum is a lightweight skin care product containing high concentrations of active ingredients to target specific skin concerns such as hydration, ageing, acne, or pigmentation. The light texture is easily absorbed by the skin for faster results.',
-    descriptionEn: 'A lightweight face serum with high concentrations of active ingredients targeting specific skin concerns — hydration, ageing, acne, or pigmentation. The light texture is easily absorbed for faster visible results.',
-    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
-    keyIngredients: [
-      { name: 'Castor Oil', role: 'The Moisture Lock', benefit: 'Deeply moisturizes and helps prevent moisture loss. Anti-inflammatory and anti-bacterial, promoting rapid skin healing.' },
-      { name: 'Tamanu Oil', role: 'The Skin Renewer', benefit: 'Promotes the production of new cells. Effective for healing wounds, scars, and burns.' },
-      { name: 'Jojoba', role: 'The Gentle Hydrator', benefit: 'Softens and moisturizes without clogging pores. Draws moisture into the skin and maintains hydration.' },
-      { name: 'Rose Geranium Essential Oil', role: 'The Pore Balancer', benefit: 'Balances skin oil production and helps refine the appearance of open pores.' },
-    ],
-    usage: [
-      { step: 'Cleanse Face', detail: 'Ensure your face is clean and dry.' },
-      { step: 'Apply Toner', detail: 'Use toner to balance the skin\'s pH level.' },
-      { step: 'Apply Serum', detail: 'Take a few drops and apply evenly onto the face and neck.' },
-      { step: 'Moisturize', detail: 'Follow with moisturizer to lock in hydration.' },
-    ],
-  },
-  {
-    id: 'bakuchiol',
-    name: 'Bakuchiol + Vit C Serum',
-    brand: 'Sinarosa',
-    category: 'Vegan & Antioxidants',
-    size: '10ml',
-    price: 'RM59',
-    icon: Sparkles,
-    tagColor: 'bg-dark text-white',
-    shortDesc: 'A powerful antioxidant serum that combats signs of ageing, minimises sensitivity, and brightens over time — vegan-certified and gentle on reactive skin.',
-    description: 'Bakuchiol has soothing properties that help calm the skin and minimize issues related to sensitivity and reactivity. It is also a powerful antioxidant that helps fight signs of ageing.',
-    descriptionEn: 'Bakuchiol has calming properties that soothe the skin and minimise sensitivity. A powerful antioxidant that combats signs of ageing — fine lines and loss of firmness — by targeting free radicals.',
-    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
-    keyIngredients: [
-      { name: 'Meadowfoam Seed', role: 'The Fast Absorber', benefit: 'Fast-absorbing moisture without a greasy residue. Smoothes skin texture and is non-comedogenic.' },
-      { name: 'Vitamin C', role: 'The Brightener', benefit: 'Brightens skin and helps treat pigmentation. Stimulates collagen production and provides anti-ageing benefits.' },
-      { name: 'Squalane', role: 'The Protector', benefit: 'Anti-inflammatory and skin-soothing. Strengthens the outer skin barrier and prevents moisture loss.' },
-    ],
-    usage: [
-      { step: 'Cleanse Face', detail: 'Ensure your face is clean and dry.' },
-      { step: 'Apply Toner', detail: 'Use toner to balance the skin\'s pH level.' },
-      { step: 'Apply Serum', detail: 'Take a few drops and apply evenly onto the face and neck.' },
-      { step: 'Moisturize', detail: 'Follow with moisturizer to lock in hydration.' },
-    ],
-  },
-  {
-    id: 'royal',
-    name: 'Royal Pudding Sleeping Mask',
-    brand: 'Sinarosa',
-    category: 'For All Skin Type',
-    size: '50gm',
-    price: 'RM65',
-    icon: FlaskConical,
-    tagColor: 'bg-muted text-white',
-    shortDesc: 'An overnight sleeping mask that works while you sleep — maintaining skin moisture, supporting the repair process, and leaving skin softer and more radiant by morning.',
-    description: 'A sleeping mask used at night before sleep. Helps maintain moisture throughout the night, making skin softer and more hydrated while aiding the skin\'s natural repair process.',
-    descriptionEn: 'A nighttime skincare product applied before sleep. Maintains skin moisture throughout the night and supports the skin repair process by delivering nutrients and active ingredients while you sleep.',
-    shopeeLink: 'https://shopee.com.my/ananaz_medispa', // Placeholder
-    keyIngredients: [
-      { name: 'Jojoba', role: 'The Hydrator', benefit: 'Maintains skin moisture with anti-inflammatory and antioxidant properties. Enriched with vitamins E & B.' },
-      { name: 'Aloe Vera', role: 'The Soother', benefit: 'Accelerates wound healing and treats scars. Relieves skin irritation with anti-inflammatory benefits.' },
-      { name: 'Rice Brown Oil', role: 'The Age-Defier', benefit: 'Anti-ageing and intensively moisturizing. Reduces dark spots and pigmentation over time.' },
-      { name: 'Lavender Oil', role: 'The Relaxer', benefit: 'Enriched with vitamin E to soften the skin. Acts as a protective barrier against dehydration.' },
-      { name: 'Sweet Almond', role: 'The Skin Repairer', benefit: 'Antioxidant that prevents damage from UV rays and evens out skin tone.' },
-      { name: 'Olive Oil', role: 'The Barrier Boost', benefit: 'Enriched with vitamin E. Creates a protective layer to prevent core hydration loss overnight.' },
-    ],
-    usage: [
-      { step: 'Step 1', detail: 'Cleanse your face.' },
-      { step: 'Step 2', detail: 'Apply toner, then serum.' },
-      { step: 'Step 3', detail: 'Use your regular moisturizer.' },
-      { step: 'Step 4', detail: 'Apply the sleeping mask as the final step.' },
-      { step: 'Step 5', detail: 'Leave on overnight and rinse off in the morning.' },
-    ],
-  },
-]
-
-const routines = [
-  { title: 'Morning Glow', products: ['Mawar Lourve Serum'], benefit: 'Deep hydration and barrier protection for the day ahead.' },
-  { title: 'Advanced Anti-Ageing', products: ['Bakuchiol + Vit C Serum', 'Royal Pudding Sleeping Mask'], benefit: 'Target fine lines and overnight recovery with potent antioxidants.' },
-  { title: 'The Full Ritual', products: ['Mawar Lourve Serum', 'Bakuchiol + Vit C Serum', 'Royal Pudding Sleeping Mask'], benefit: 'Complete skin transformation — hydration, brightening, and repair.' },
-]
-
-type Product = typeof products[0]
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
+import { productsData, ProductItem } from '../data/products'
 
 export default function ProductsPage() {
   const { addItem, setIsCartOpen, totalItems } = useCart()
-  const [selected, setSelected] = useState<Product | null>(null)
-  const [activeTab, setActiveTab] = useState<'ingredients' | 'usage'>('ingredients')
+  const [selected, setSelected] = useState<ProductItem | null>(null)
+  const [activeTab, setActiveTab] = useState<'benefits' | 'usage' | 'ingredients'>('benefits')
+  const [currentFilter, setCurrentFilter] = useState<string>('All')
 
-  const openDrawer = (p: Product) => {
+  const filterCategories = ['All', 'Cleansing', 'Moisturising', 'Toning', 'Serum', 'Protection']
+  const filteredProducts = currentFilter === 'All' 
+    ? productsData 
+    : productsData.filter(p => p.filterCategory === currentFilter)
+
+  const openDrawer = (p: ProductItem) => {
     setSelected(p)
-    setActiveTab('ingredients')
+    setActiveTab('benefits')
     document.body.style.overflow = 'hidden'
   }
   const closeDrawer = () => {
@@ -119,8 +31,6 @@ export default function ProductsPage() {
 
   return (
     <div className="bg-cream min-h-screen">
-      {/* ── HERO ─────────────────────────────────────────────────────── */}
-
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden pt-36 pb-24" style={{ background: 'linear-gradient(145deg, #1A5F62 0%, #2D8B8E 40%, #3D6060 70%, #2C2621 100%)' }}>
         <div
@@ -166,20 +76,64 @@ export default function ProductsPage() {
           className="mb-16 border-b border-divider pb-10"
         >
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-gold mb-3 font-bold">Our Products</p>
-          <h2 className="font-display text-3xl lg:text-4xl font-semibold text-dark">3 Signature Formulas</h2>
+          <h2 className="font-display text-3xl lg:text-4xl font-semibold text-dark">Signature Formulas</h2>
         </motion.div>
 
+        {/* Desktop Tabs (hidden on small screens) */}
+        <div className="hidden lg:block relative mb-12 w-[98vw] left-1/2 -translate-x-1/2">
+          <div className="flex items-center justify-center gap-3 xl:gap-4 overflow-hidden px-4 pb-0 w-full">
+            {filterCategories.map((cat) => {
+              const isActive = cat === currentFilter
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setCurrentFilter(cat)}
+                  className={`whitespace-nowrap flex-shrink-0 flex justify-center items-center px-6 py-3 rounded-full font-body text-[11px] xl:text-xs tracking-widest uppercase font-bold transition-all duration-300 text-center leading-tight ${
+                    isActive 
+                      ? 'bg-gold text-white shadow-md' 
+                      : 'bg-white text-dark/70 hover:text-gold border border-divider hover:border-gold shadow-sm'
+                  }`}
+                >
+                  {cat}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Mobile Dropdown (visible only on small screens) */}
+        <div className="block lg:hidden mb-8 relative w-full">
+          <select 
+            value={currentFilter}
+            onChange={(e) => setCurrentFilter(e.target.value)}
+            className="w-full appearance-none bg-white border border-divider text-dark/80 font-body text-[10px] sm:text-xs tracking-widest uppercase font-bold py-3.5 pl-6 pr-12 rounded-full shadow-sm focus:outline-none focus:border-gold transition-colors"
+          >
+            {filterCategories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5">
+            <svg className="h-4 w-4 text-dark/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-          {products.map((p, i) => {
+          <AnimatePresence mode="popLayout">
+            {filteredProducts.map((p, i) => {
             const Icon = p.icon
             return (
               <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
                 key={p.id}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.7 }}
-                className="group flex flex-col bg-cream border border-divider hover:border-gold hover:shadow-lg transition-all duration-300 overflow-hidden h-full"
+                className="group flex flex-col bg-cream border border-divider hover:border-gold hover:shadow-lg transition-all overflow-hidden h-full"
               >
                 {/* Image */}
                 <div className="relative w-full aspect-square overflow-hidden flex-shrink-0">
@@ -236,66 +190,7 @@ export default function ProductsPage() {
               </motion.div>
             )
           })}
-        </div>
-      </section>
-
-      {/* ── ROUTINES ──────────────────────────────────────────────────── */}
-      <section className="py-28 lg:py-36 bg-cream border-t border-divider">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <p className="font-body text-xs tracking-[0.25em] uppercase text-gold flex items-center justify-center gap-3 mb-5">
-              <span className="w-8 h-px bg-gold inline-block" />
-              Better Together
-            </p>
-            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-dark mb-4">Rituals for Results.</h2>
-            <p className="font-body text-muted text-base max-w-lg mx-auto">
-              Our products are designed to work in synergy. Pair them correctly to amplify their clinical benefits.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {routines.map((r, i) => (
-              <motion.div
-                key={r.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-              >
-                <div className="bg-cream p-10 border border-divider h-full flex flex-col">
-                  <h3 className="font-display text-2xl font-semibold text-dark mb-4">{r.title}</h3>
-                  <div className="flex-1">
-                    <ul className="mb-8 space-y-3">
-                      {r.products.map(rp => (
-                        <li key={rp} className="flex items-center gap-2 font-body text-sm text-dark font-medium">
-                          <CheckCircle2 size={14} className="text-gold" />
-                          {rp}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="font-body text-xs text-muted leading-relaxed italic border-l-2 border-gold/30 pl-4">
-                      {r.benefit}
-                    </p>
-                  </div>
-                  <div className="mt-8 pt-8 border-t border-divider/50">
-                    <a
-                      href={waGeneral()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 font-body text-xs font-semibold tracking-widest uppercase text-dark hover:text-gold transition-colors"
-                    >
-                      Consult with us <ArrowRight size={13} />
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          </AnimatePresence>
         </div>
       </section>
 
@@ -365,33 +260,35 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Description */}
-                <p className="font-body text-sm text-muted leading-relaxed">{selected.descriptionEn}</p>
+                <div>
+                  <h4 className="font-display text-lg font-semibold text-dark mb-2">{selected.shortDesc}</h4>
+                  <p className="font-body text-sm text-muted leading-relaxed">{selected.description}</p>
+                </div>
 
                 {/* Tabs */}
                 <div>
                   <div className="flex gap-0 border-b border-divider mb-8">
-                    {(['ingredients', 'usage'] as const).map(tab => (
+                    {(['benefits', 'usage', 'ingredients'] as const).map(tab => (
                       <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`px-5 py-3 font-body text-xs tracking-widest uppercase font-bold border-b-2 transition-all ${
+                        className={`px-5 py-3 font-body text-[10px] tracking-widest uppercase font-bold border-b-2 transition-all ${
                           activeTab === tab
                             ? 'border-gold text-gold'
                             : 'border-transparent text-muted hover:text-dark'
                         }`}
                       >
-                        {tab === 'ingredients' ? 'Key Ingredients' : 'How to Use'}
+                        {tab === 'benefits' ? 'Key Benefits' : tab === 'usage' ? 'How to Use' : 'Hero Ingredients'}
                       </button>
                     ))}
                   </div>
 
-                  {activeTab === 'ingredients' && (
+                  {activeTab === 'benefits' && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                      {selected.keyIngredients.map((ing, i) => (
-                        <div key={i} className="border border-divider p-5 hover:border-gold/50 transition-colors">
-                          <span className="font-body text-[9px] tracking-widest uppercase text-gold/60 mb-1 block">{ing.role}</span>
-                          <h4 className="font-display text-base font-semibold text-dark mb-2">{ing.name}</h4>
-                          <p className="font-body text-xs text-muted leading-relaxed">{ing.benefit}</p>
+                      {selected.keyBenefits.map((benefit, i) => (
+                        <div key={i} className="flex gap-4 items-center">
+                          <CheckCircle2 size={16} className="text-gold flex-shrink-0" />
+                          <span className="font-body text-sm font-semibold text-dark">{benefit}</span>
                         </div>
                       ))}
                     </motion.div>
@@ -399,15 +296,25 @@ export default function ProductsPage() {
 
                   {activeTab === 'usage' && (
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                      {selected.usage.map((step, i) => (
+                      {selected.howToUse.map((step, i) => (
                         <div key={i} className="flex gap-4 items-start">
-                          <div className="flex-shrink-0 w-7 h-7 rounded-full border border-gold/40 flex items-center justify-center mt-0.5">
-                            <Check size={12} className="text-gold" />
+                          <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gold/10 flex items-center justify-center mt-0.5">
+                            <span className="font-body text-xs font-bold text-gold">{i + 1}</span>
                           </div>
                           <div>
-                            <span className="font-body text-xs font-semibold text-dark">{step.step}: </span>
-                            <span className="font-body text-xs text-muted">{step.detail}</span>
+                            <span className="font-body text-sm text-dark">{step}</span>
                           </div>
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+
+                  {activeTab === 'ingredients' && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-2 gap-4">
+                      {selected.heroIngredients.map((ing, i) => (
+                        <div key={i} className="flex items-center gap-3 bg-cream border border-divider px-4 py-3 rounded-xl">
+                           <Leaf size={14} className="text-gold flex-shrink-0" />
+                           <span className="font-body text-sm font-medium text-dark">{ing}</span>
                         </div>
                       ))}
                     </motion.div>
